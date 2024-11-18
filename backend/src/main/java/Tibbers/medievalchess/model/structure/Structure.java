@@ -6,6 +6,7 @@ public class Structure {
     protected Player player;
     protected int income;
     protected int id;
+    protected String type;
 
     public Structure (Player player) {
         this.player = player;

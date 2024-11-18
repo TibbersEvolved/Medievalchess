@@ -2,14 +2,13 @@ package Tibbers.medievalchess.model.piece;
 
 import Tibbers.medievalchess.model.Player;
 
-public class King extends Piece{
-
-    public King(Player player) {
+public class Torch extends Piece{
+    public Torch(Player player) {
         super(player);
-        hp = 20;
-        type = "king";
+        hp = 10;
+        type = "torch";
         movementSpeed = 1;
         movementType = "any";
-        weakAgainst = "none";
+        weakAgainst = "archer";
     }
 }

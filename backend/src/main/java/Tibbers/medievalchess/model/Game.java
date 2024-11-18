@@ -1,5 +1,7 @@
 package Tibbers.medievalchess.model;
 
+import Tibbers.medievalchess.model.piece.King;
+import Tibbers.medievalchess.model.piece.Piece;
 import Tibbers.medievalchess.model.structure.Keep;
 import Tibbers.medievalchess.model.structure.Structure;
 
@@ -53,7 +55,13 @@ public class Game {
         }
         structures.add(tiles[0][4].setStructure(new Keep(playerList.get(0))));
         structures.add(tiles[7][5].setStructure(new Keep(playerList.get(1))));
+        tiles[0][4].setPiece(new King(playerList.get(0)));
+        tiles[7][5].setPiece(new King(playerList.get(1)));
         return tiles;
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
     }
 
     public Player getPlayer(int index) {

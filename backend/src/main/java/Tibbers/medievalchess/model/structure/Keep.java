@@ -6,5 +6,6 @@ public class Keep extends Structure{
     public Keep(Player player) {
         super(player);
         income = 10;
+        type = "keep";
     }
 }
