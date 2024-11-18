@@ -11,8 +11,8 @@ import java.util.UUID;
 public class GameRepository {
     List<Game> activeGames = new ArrayList<>();
 
-    public UUID startNewGame() {
-       Game game = Game.newGame();
+    public UUID startNewGame(String gameName) {
+       Game game = Game.newGame(gameName);
        activeGames.add(game);
        return game.getGameId();
     }
@@ -22,5 +22,9 @@ public class GameRepository {
                 .filter(s -> s.getGameId() == id)
                 .toList();
         return game.get(0);
+    }
+
+    public List<Game> getAllGames() {
+        return activeGames;
     }
 }

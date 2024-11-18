@@ -12,14 +12,15 @@ import java.util.UUID;
 public class Game {
     private Tile[][] tiles;
     private UUID gameId;
+    private String gameName;
     private int turn;
     private int playerTurn;
     private List<Player> playerList = new ArrayList<>();
     private List<Structure> structures = new ArrayList<>();
 
 
-    public static Game newGame() {
-        Game game = new Game();
+    public static Game newGame(String gameName) {
+        Game game = new Game(gameName);
         game.turn = 0;
         game.playerTurn = 0;
         game.playerList.add(new Player());
@@ -28,8 +29,9 @@ public class Game {
         return game;
     }
 
-    public Game() {
+    public Game(String name) {
         this.gameId = UUID.randomUUID();
+        this.gameName = name;
     }
 
     public void endTurn() {
@@ -70,5 +72,9 @@ public class Game {
 
     public UUID getGameId() {
         return gameId;
+    }
+
+    public String getGameName() {
+        return gameName;
     }
 }

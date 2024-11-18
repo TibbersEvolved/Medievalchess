@@ -13,7 +13,7 @@ public class GameRepositoryTests {
 
     @Test
     void shouldCreateNewGameAndFindItById() {
-        UUID gameid = repository.startNewGame();
+        UUID gameid = repository.startNewGame("test");
         assertNotEquals(null,repository.findGameById(gameid));
     }
 }
