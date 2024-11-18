@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/hosts")
 public class HostController {
 
@@ -18,9 +19,10 @@ public class HostController {
         this.gameService = gameService;
     }
 
-    @PostMapping("/{name}")
-    public ResponseEntity<UUID> startNewGame(@PathVariable String name) {
-        return ResponseEntity.ok(gameService.startNewGame(name));
+    @PostMapping()
+    public ResponseEntity<UUID> startNewGame(@RequestBody HostCreateGameDto dto) {
+        return ResponseEntity.ok(gameService
+                .startNewGame(dto.gameName(), dto.player1(), dto.player2()));
     }
 
     @GetMapping
@@ -30,6 +32,11 @@ public class HostController {
                 .map(s -> buildHostGameDto(s.getGameName(),s.getGameId()))
                 .toList();
         return ResponseEntity.ok(new ListHostGameDto(listDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteGame(@PathVariable String id) {
+        gameService.deleteGame(id);
     }
 
 

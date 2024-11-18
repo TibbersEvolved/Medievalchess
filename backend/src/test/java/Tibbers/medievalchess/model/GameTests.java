@@ -9,7 +9,7 @@ public class GameTests {
 
     @Test
     void shouldGainIncomeOnNewGame() {
-        Game game = Game.newGame("test");
+        Game game = Game.newGame("test","","");
         game.endTurn();
         Player player = game.getPlayer(1);
         game.endTurn();
@@ -20,7 +20,7 @@ public class GameTests {
 
     @Test
     void shouldLoopPlayerTurns() {
-        Game game = Game.newGame("test");
+        Game game = Game.newGame("test","","");
         game.endTurn();
         game.endTurn();
         assertEquals(0,game.getPlayerTurn());

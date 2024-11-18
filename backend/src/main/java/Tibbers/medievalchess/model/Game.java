@@ -19,12 +19,12 @@ public class Game {
     private List<Structure> structures = new ArrayList<>();
 
 
-    public static Game newGame(String gameName) {
+    public static Game newGame(String gameName, String player1, String player2) {
         Game game = new Game(gameName);
         game.turn = 0;
         game.playerTurn = 0;
-        game.playerList.add(new Player());
-        game.playerList.add(new Player());
+        game.playerList.add(new Player(player1));
+        game.playerList.add(new Player(player2));
         game.tiles = game.getDefaultGameSettings();
         return game;
     }

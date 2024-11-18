@@ -15,8 +15,8 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
-    public UUID startNewGame(String gameName) {
-        return gameRepository.startNewGame(gameName);
+    public UUID startNewGame(String gameName, String player1, String player2) {
+        return gameRepository.startNewGame(gameName, player1, player2);
     }
 
     public Game getGameById(UUID id) {
@@ -25,5 +25,9 @@ public class GameService {
 
     public List<Game> getAllGames() {
         return gameRepository.getAllGames();
+    }
+
+    public void deleteGame(String id) {
+        gameRepository.deleteGame(id);
     }
 }

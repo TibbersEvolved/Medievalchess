@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as NewGameImport } from './routes/newGame'
 import { Route as GameImport } from './routes/game'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const NewGameRoute = NewGameImport.update({
+  id: '/newGame',
+  path: '/newGame',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const GameRoute = GameImport.update({
   id: '/game',
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameImport
       parentRoute: typeof rootRoute
     }
+    '/newGame': {
+      id: '/newGame'
+      path: '/newGame'
+      fullPath: '/newGame'
+      preLoaderRoute: typeof NewGameImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game': typeof GameRoute
+  '/newGame': typeof NewGameRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/game': typeof GameRoute
+  '/newGame': typeof NewGameRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/game': typeof GameRoute
+  '/newGame': typeof NewGameRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/game'
+  fullPaths: '/' | '/game' | '/newGame'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/game'
-  id: '__root__' | '/' | '/game'
+  to: '/' | '/game' | '/newGame'
+  id: '__root__' | '/' | '/game' | '/newGame'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRoute: typeof GameRoute
+  NewGameRoute: typeof NewGameRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRoute: GameRoute,
+  NewGameRoute: NewGameRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/game"
+        "/game",
+        "/newGame"
       ]
     },
     "/": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/game": {
       "filePath": "game.tsx"
+    },
+    "/newGame": {
+      "filePath": "newGame.tsx"
     }
   }
 }

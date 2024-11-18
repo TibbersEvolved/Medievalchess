@@ -4,7 +4,23 @@ export default function Navbar() {
   return (
     <>
       {" "}
-      <div className="p-2 flex justify-center gap-2 text-lg bg-info">
+      <div className="p-2 flex justify-center gap-10 text-lg bg-info">
+        <Link
+          to="/game"
+          activeProps={{
+            className: "font-bold",
+          }}
+        >
+          Games
+        </Link>
+        <Link
+          to="/newGame"
+          activeProps={{
+            className: "font-bold",
+          }}
+        >
+          New Game
+        </Link>
         <Link
           to="/"
           activeProps={{
@@ -14,14 +30,6 @@ export default function Navbar() {
         >
           Home
         </Link>{" "}
-        <Link
-          to="/game"
-          activeProps={{
-            className: "font-bold",
-          }}
-        >
-          Games
-        </Link>
       </div>
     </>
   );

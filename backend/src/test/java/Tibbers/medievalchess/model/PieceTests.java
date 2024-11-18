@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PieceTests {
-    Player mockplayer = new Player();
+    Player mockplayer = new Player("Simon");
 
 
     @Test
