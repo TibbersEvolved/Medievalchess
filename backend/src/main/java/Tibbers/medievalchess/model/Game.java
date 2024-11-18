@@ -68,4 +68,7 @@ public class Game {
         return playerList.get(index);
     }
 
+    public UUID getGameId() {
+        return gameId;
+    }
 }

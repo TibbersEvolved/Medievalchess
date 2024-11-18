@@ -49,7 +49,7 @@ public class PieceTests {
     }
 
     @Test
-    void KnightShouldTake10DamageFromTorch() {
+    void knightShouldTake10DamageFromTorch() {
         Piece piece = new Knight(mockplayer);
         piece.takeDamage("torch");
         assertEquals(5,piece.getHp());
