@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <>
       {" "}
-      <div className="p-2 flex justify-center gap-10 text-lg bg-info">
+      <div className="p-2 flex justify-center gap-10 text-lg bg-base-300">
         <Link
           to="/game"
           activeProps={{

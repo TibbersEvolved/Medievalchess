@@ -1,5 +1,7 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import GameInfoPlayer from "../components/game/gameSelect/gameInfoPlayer";
+import GameInfo from "../components/game/gameSelect/gameInfo";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
