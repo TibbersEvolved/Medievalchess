@@ -12,7 +12,7 @@ export default function Tile(prop: tileProp) {
           alt=""
           onClick={() => changeSelected(!selected)}
         />
-        <GamePiece />
+        {selected && <GamePiece />}
       </div>
     </>
   );
