@@ -1,4 +1,4 @@
-package Tibbers.MedievalChess.HTTP;
+package Tibbers.medievalchess.http;
 
 import org.springframework.web.bind.annotation.RestController;
 

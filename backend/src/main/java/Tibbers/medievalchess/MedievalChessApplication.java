@@ -1,4 +1,4 @@
-package Tibbers.MedievalChess;
+package Tibbers.medievalchess;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
