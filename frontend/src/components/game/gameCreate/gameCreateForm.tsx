@@ -8,7 +8,7 @@ export default function GameCreateForm() {
     const data: dto = {
       gameName: (input.elements[0] as HTMLInputElement).value,
       player1: (input.elements[1] as HTMLInputElement).value,
-      player2: (input.elements[3] as HTMLInputElement).value,
+      player2: (input.elements[2] as HTMLInputElement).value,
     };
     createGame(data);
   }

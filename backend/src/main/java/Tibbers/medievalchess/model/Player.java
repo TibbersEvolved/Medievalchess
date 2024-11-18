@@ -17,4 +17,8 @@ public class Player {
     public int getGold() {
         return gold;
     }
+
+    public String getName() {
+        return name;
+    }
 }

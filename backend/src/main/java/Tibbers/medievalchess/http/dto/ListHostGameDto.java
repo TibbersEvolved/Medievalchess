@@ -1,4 +1,4 @@
-package Tibbers.medievalchess.http;
+package Tibbers.medievalchess.http.dto;
 
 import java.util.List;
 

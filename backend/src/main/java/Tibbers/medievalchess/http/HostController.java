@@ -1,10 +1,12 @@
 package Tibbers.medievalchess.http;
 
+import Tibbers.medievalchess.http.dto.*;
 import Tibbers.medievalchess.model.Game;
 import Tibbers.medievalchess.service.GameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,10 +41,22 @@ public class HostController {
         gameService.deleteGame(id);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<HostGameDetailedDto> getDetailedGameInfo(@PathVariable String id) {
+        Game game = gameService.getGameById(UUID.fromString(id));
+        List<PlayerDto> players = new ArrayList<>();
+        players.add(new PlayerDto
+                (game.getPlayer(0).getName(),game.getPlayer(0).getGold()));
+        players.add(new PlayerDto
+                (game.getPlayer(1).getName(),game.getPlayer(1).getGold()));
+        HostGameDetailedDto output = new HostGameDetailedDto(game.getGameName(),
+                players,game.getTurn(), game.getPlayerTurn());
+        return ResponseEntity.ok(output);
+    }
+
 
     public HostGameDto buildHostGameDto(String name, UUID id) {
         return new HostGameDto(name, id.toString());
     }
-
 
 }
