@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.piece {
+  height: 64px;
+  width: 64px;
+}
+
+.gameGrid {
+  display: grid;
+  grid-template-rows: repeat(8, 64px);
+  grid-template-columns: repeat(8, 64px);
+}
