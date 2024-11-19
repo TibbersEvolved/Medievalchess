@@ -4,7 +4,7 @@ import GameSelect from "./gameSelect";
 import { useState } from "react";
 import GameInfo from "./gameInfo";
 
-export default function ListGameSelect() {
+export default function ListGameSelect(props: gameSelectProp) {
   const [selectId, setSelectId] = useState("");
   const [selected, setSelected] = useState(false);
   function handleSelect(e: string) {
@@ -40,7 +40,9 @@ export default function ListGameSelect() {
             );
           })}
         </div>
-        {selected && <GameInfo id={selectId} />}
+        {selected && (
+          <GameInfo id={selectId} cb={() => props.callback(selectId)} />
+        )}
       </section>
     </>
   );
@@ -54,3 +56,15 @@ type fetchData = {
   name: string;
   id: string;
 };
+
+type gameSelectProp = {
+  callback: stateCallbackString;
+};
+
+export interface stateCallback {
+  (): void;
+}
+
+export interface stateCallbackString {
+  (e: string): void;
+}

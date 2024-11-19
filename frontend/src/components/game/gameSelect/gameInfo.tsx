@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { basepath } from "../../../utilities/backendPaths";
 import GameInfoPlayer from "./gameInfoPlayer";
+import { stateCallback } from "./listGameSelect";
 
 export default function GameInfo(props: prop) {
   const { isPending, isError, data, error } = useQuery({
@@ -27,7 +28,9 @@ export default function GameInfo(props: prop) {
             <GameInfoPlayer name={player.name} gold={player.gold} key={index} />
           );
         })}
-        <button className="btn bg-base-300">Enter Game</button>
+        <button className="btn bg-base-300" onClick={props.cb}>
+          Enter Game
+        </button>
       </section>
     </>
   );
@@ -47,6 +50,7 @@ export type playerData = {
 
 type prop = {
   id: string;
+  cb: stateCallback;
 };
 
 function fetchInfo(id: string) {
