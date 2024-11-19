@@ -10,7 +10,11 @@ public class GameService {
 
     private GameRepository gameRepository;
 
-    public void endGameTurn(UUID id){
+    public GameService (GameRepository gameRepository) {
+        this.gameRepository = gameRepository;
+    }
 
+    public void endGameTurn(UUID id){
+        gameRepository.findGameById(id).endTurn();
     }
 }

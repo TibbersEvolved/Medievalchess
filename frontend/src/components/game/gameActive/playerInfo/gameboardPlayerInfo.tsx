@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { basepath } from "../../../utilities/backendPaths";
-import GameInfoPlayer from "../gameSelect/gameInfoPlayer";
+import { basepath } from "../../../../utilities/backendPaths";
+import GameInfoPlayer from "../../gameSelect/gameInfoPlayer";
+import { stateCallback } from "../../gameSelect/listGameSelect";
+import { webEndTurn } from "../utilities/fetchCommands";
 
 export default function GameBoardPlayerInfo(props: prop) {
   const { isPending, isError, data, error } = useQuery({
@@ -16,6 +18,10 @@ export default function GameBoardPlayerInfo(props: prop) {
     return <span>Error: {error.message}</span>;
   }
   const typedData: gameData = data;
+  async function endTurn() {
+    await webEndTurn(props.id);
+    props.cb();
+  }
 
   return (
     <>
@@ -28,7 +34,9 @@ export default function GameBoardPlayerInfo(props: prop) {
             <GameInfoPlayer name={player.name} gold={player.gold} key={index} />
           );
         })}
-        <button className="btn bg-base-300">End Turn</button>
+        <button className="btn bg-base-300" onClick={endTurn}>
+          End Turn
+        </button>
       </section>
     </>
   );
@@ -48,6 +56,7 @@ export type playerData = {
 
 type prop = {
   id: string;
+  cb: stateCallback;
 };
 
 function fetchInfo(id: string) {

@@ -14,8 +14,8 @@ public class GameTests {
         Player player = game.getPlayer(1);
         game.endTurn();
         Player player2 = game.getPlayer(0);
-        assertEquals(10,player.getGold());
-        assertEquals(10,player2.getGold());
+        assertEquals(50,player.getGold());
+        assertEquals(50,player2.getGold());
     }
 
     @Test

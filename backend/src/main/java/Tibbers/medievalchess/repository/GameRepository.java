@@ -11,6 +11,10 @@ import java.util.UUID;
 public class GameRepository {
     List<Game> activeGames = new ArrayList<>();
 
+    public GameRepository() {
+        startNewGame("Testgame","Johnni","Simon");
+    }
+
     public UUID startNewGame(String gameName, String player1, String player2) {
        Game game = Game.newGame(gameName,player1,player2);
        activeGames.add(game);

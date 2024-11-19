@@ -8,6 +8,7 @@ import Tibbers.medievalchess.model.Game;
 import Tibbers.medievalchess.model.Tile;
 import Tibbers.medievalchess.model.piece.Piece;
 import Tibbers.medievalchess.model.structure.Structure;
+import Tibbers.medievalchess.service.GameService;
 import Tibbers.medievalchess.service.HostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +23,23 @@ import java.util.UUID;
 public class GameController {
 
     private HostService hostService;
+    private GameService gameService;
 
-    public GameController(HostService hostService) {
+    public GameController(HostService hostService, GameService gameService) {
         this.hostService = hostService;
+        this.gameService = gameService;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ActiveGameDto> getGame(@PathVariable String id) {
         Game game = hostService.getGameById(UUID.fromString(id));
      return ResponseEntity.ok(getGameDtoFromGame(game));
+    }
+
+    @PostMapping("/endTurn/{id}")
+    public ResponseEntity endGameTurn(@PathVariable String id) {
+        gameService.endGameTurn(UUID.fromString(id));
+        return ResponseEntity.ok().build();
     }
 
 
