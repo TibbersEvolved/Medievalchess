@@ -3,7 +3,7 @@ import { pieceType } from "../gameboard";
 export default function GamePiece(props: pieceType) {
   return (
     <img
-      className="absolute piece z-30 mt-3"
+      className="absolute piece z-30 mt-3 pointer-events-none"
       src={getPieceImage(props.type, props.owner)}
     ></img>
   );

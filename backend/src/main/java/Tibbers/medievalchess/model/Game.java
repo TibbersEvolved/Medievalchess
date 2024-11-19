@@ -92,4 +92,38 @@ public class Game {
     public Tile[][] getTiles() {
         return tiles;
     }
+
+    public void moveUnit (int startX, int startY, int targetX, int targetY) {
+        if(startX < 0 || startX > 7 || startY < 0 || startY > 7
+                ||targetX < 0 || targetX > 7||targetY < 0 || targetY > 7) {
+            return;
+        }
+        Tile targetTile = tiles[targetY][targetX];
+        if(targetTile.getPiece() != null) {
+            return;
+        }
+        Tile fromTile = tiles[startY][startY];
+        int moveSpeed = fromTile.getPiece().getMovementSpeed();
+        if(fromTile.getPiece().getMovementType() == "any") {
+            if(Math.abs(startX-targetX) <= moveSpeed && Math.abs(startY-targetY) <= moveSpeed) {
+                swapPiece(fromTile,targetTile);
+                return;
+            }
+        }
+        if (fromTile.getPiece().getMovementType() == "straight"){
+            if(startX == targetX && Math.abs(startY - targetY) <= moveSpeed){
+                    swapPiece(fromTile,targetTile);
+                    return;
+            }
+            if (startY == targetY && Math.abs(startX - targetX) <= moveSpeed) {
+                swapPiece(fromTile,targetTile);
+            }
+        }
+    }
+
+    private void swapPiece(Tile tileFrom, Tile tileTo) {
+        Piece piece = tileFrom.getPiece();
+        tileFrom.setPiece(null);
+        tileTo.setPiece(piece);
+    }
 }
