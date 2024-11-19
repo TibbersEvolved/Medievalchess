@@ -24,7 +24,9 @@ public class Game {
         game.turn = 0;
         game.playerTurn = 0;
         game.playerList.add(new Player(player1));
+        game.playerList.get(0).setTurnId(0);
         game.playerList.add(new Player(player2));
+        game.playerList.get(1).setTurnId(1);
         game.tiles = game.getDefaultGameSettings();
         return game;
     }
@@ -80,5 +82,9 @@ public class Game {
 
     public int getTurn() {
         return turn;
+    }
+
+    public Tile[][] getTiles() {
+        return tiles;
     }
 }

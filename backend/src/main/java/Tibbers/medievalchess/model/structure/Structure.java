@@ -18,4 +18,12 @@ public class Structure {
         }
         return 0;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

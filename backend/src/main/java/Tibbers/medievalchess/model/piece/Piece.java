@@ -5,14 +5,16 @@ import Tibbers.medievalchess.model.Player;
 public class Piece {
     protected Player player;
     protected int id;
-    protected float hp;
+    protected int hp;
     protected String type;
     protected String movementType;
     protected String weakAgainst;
     protected int movementSpeed;
+    protected boolean active;
 
     public Piece(Player player) {
         this.player = player;
+        active = false;
     }
 
     public boolean takeDamage(String dmgType) {
@@ -43,11 +45,19 @@ public class Piece {
         return weakAgainst;
     }
 
-    public float getHp() {
+    public int getHp() {
         return hp;
     }
 
     public Player getPlayer() {
         return player;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

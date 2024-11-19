@@ -4,6 +4,7 @@ public class Player {
     private int id;
     private int gold;
     private String name;
+    private int turnId;
 
     public Player(String name) {
         this.name = name;
@@ -20,5 +21,13 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public int getTurnId() {
+        return turnId;
+    }
+
+    public void setTurnId(int turnId) {
+        this.turnId = turnId;
     }
 }

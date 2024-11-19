@@ -19,7 +19,7 @@ export default function GameInfo(props: prop) {
 
   return (
     <>
-      <section className="flex flex-col gap-2 bg-base-200 p-3 rounded-sm">
+      <section className="flex flex-col gap-2 bg-base-200 p-3 rounded-sm min-w-80">
         <div className="font-extrabold">{typedData.gameName}</div>
         <div>Turn: {typedData.gameTurn}</div>
         {typedData.players.map((player, index) => {

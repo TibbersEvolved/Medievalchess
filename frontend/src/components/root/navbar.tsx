@@ -5,6 +5,7 @@ export default function Navbar() {
     <>
       {" "}
       <div className="p-2 flex justify-center gap-10 text-lg bg-base-300">
+        <img src="./src/assets/appIcon.png" className="size-8"></img>
         <Link
           to="/game"
           activeProps={{
