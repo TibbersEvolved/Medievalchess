@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { basepath } from "../../../utilities/backendPaths";
 import Tile from "./tile/tile";
+import GameBoardPlayerInfo from "./gameboardPlayerInfo";
+import { useState } from "react";
 
 export default function GameBoard(props: boardProp) {
+  const [updateGame, setUpdateGame] = useState(0);
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ["activeGame", props.id],
+    queryKey: ["activeGame", updateGame],
     queryFn: () => fetchInfo(props.id),
   });
 
@@ -19,13 +22,20 @@ export default function GameBoard(props: boardProp) {
   console.log(tiles);
   return (
     <>
-      <div>Game Loaded</div>
-      <section className="mx-auto w-fit">
+      <section className="mx-auto w-fit flex flex-row">
         <section className="gameGrid">
           {tiles.map((tile, index) => {
-            return <Tile posX={tile.xCord} posY={tile.yCord} />;
+            return (
+              <Tile
+                posX={tile.xCord}
+                posY={tile.yCord}
+                piece={tile.piece}
+                structure={tile.structure}
+              />
+            );
           })}
         </section>
+        <GameBoardPlayerInfo id={props.id} />
       </section>
     </>
   );
@@ -39,14 +49,14 @@ type boardProp = {
   id: string;
 };
 
-type pieceType = {
+export type pieceType = {
   active: boolean;
   hp: number;
   owner: number;
   type: string;
 };
 
-type structureType = {
+export type structureType = {
   owner: number;
   type: string;
 };

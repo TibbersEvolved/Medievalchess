@@ -1,7 +1,7 @@
 import { useState } from "react";
 import GameCreateButton from "./gameCreate/gameCreateButton";
 import GameSelect from "./gameSelect/gameSelect";
-import GamePiece from "./gameActive/piece/tempPiece";
+import GamePiece from "./gameActive/piece/piece";
 import Tile from "./gameActive/tile/tile";
 import tileProp from "./gameActive/tile/tile";
 import ListGameSelect from "./gameSelect/listGameSelect";

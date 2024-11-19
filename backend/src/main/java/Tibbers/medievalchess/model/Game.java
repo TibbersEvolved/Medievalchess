@@ -4,6 +4,7 @@ import Tibbers.medievalchess.model.piece.King;
 import Tibbers.medievalchess.model.piece.Piece;
 import Tibbers.medievalchess.model.structure.Keep;
 import Tibbers.medievalchess.model.structure.Structure;
+import Tibbers.medievalchess.model.structure.Town;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +58,14 @@ public class Game {
                 tiles[i][j] = new Tile();
             }
         }
-        structures.add(tiles[0][4].setStructure(new Keep(playerList.get(0))));
-        structures.add(tiles[7][5].setStructure(new Keep(playerList.get(1))));
-        tiles[0][4].setPiece(new King(playerList.get(0)));
-        tiles[7][5].setPiece(new King(playerList.get(1)));
+        structures.add(tiles[3][0].setStructure(new Keep(playerList.get(0))));
+        structures.add(tiles[1][1].setStructure(new Town(playerList.get(0))));
+        structures.add(tiles[6][1].setStructure(new Town(playerList.get(0))));
+        structures.add(tiles[4][7].setStructure(new Keep(playerList.get(1))));
+        structures.add(tiles[6][6].setStructure(new Town(playerList.get(1))));
+        structures.add(tiles[1][6].setStructure(new Town(playerList.get(1))));
+        tiles[3][0].setPiece(new King(playerList.get(0)));
+        tiles[4][7].setPiece(new King(playerList.get(1)));
         return tiles;
     }
 
