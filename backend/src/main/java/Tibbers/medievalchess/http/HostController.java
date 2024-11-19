@@ -2,7 +2,7 @@ package Tibbers.medievalchess.http;
 
 import Tibbers.medievalchess.http.dto.*;
 import Tibbers.medievalchess.model.Game;
-import Tibbers.medievalchess.service.GameService;
+import Tibbers.medievalchess.service.HostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,21 +15,21 @@ import java.util.UUID;
 @RequestMapping("/api/hosts")
 public class HostController {
 
-    private GameService gameService;
+    private HostService hostService;
 
-    public HostController(GameService gameService) {
-        this.gameService = gameService;
+    public HostController(HostService hostService) {
+        this.hostService = hostService;
     }
 
     @PostMapping()
     public ResponseEntity<UUID> startNewGame(@RequestBody HostCreateGameDto dto) {
-        return ResponseEntity.ok(gameService
+        return ResponseEntity.ok(hostService
                 .startNewGame(dto.gameName(), dto.player1(), dto.player2()));
     }
 
     @GetMapping
     public ResponseEntity<ListHostGameDto> getAllGames() {
-        List<Game> games = gameService.getAllGames();
+        List<Game> games = hostService.getAllGames();
         List<HostGameDto> listDto = games.stream()
                 .map(s -> buildHostGameDto(s.getGameName(),s.getGameId()))
                 .toList();
@@ -38,12 +38,12 @@ public class HostController {
 
     @DeleteMapping("/{id}")
     public void deleteGame(@PathVariable String id) {
-        gameService.deleteGame(id);
+        hostService.deleteGame(id);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<HostGameDetailedDto> getDetailedGameInfo(@PathVariable String id) {
-        Game game = gameService.getGameById(UUID.fromString(id));
+        Game game = hostService.getGameById(UUID.fromString(id));
         List<PlayerDto> players = new ArrayList<>();
         players.add(new PlayerDto
                 (game.getPlayer(0).getName(),game.getPlayer(0).getGold()));

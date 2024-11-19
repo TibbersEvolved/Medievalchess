@@ -19,7 +19,7 @@ export default function GameInfo(props: prop) {
 
   return (
     <>
-      <section className="flex flex-col gap-2 bg-base-200 p-3">
+      <section className="flex flex-col gap-2 bg-base-200 p-3 rounded-sm">
         <div className="font-extrabold">{typedData.gameName}</div>
         <div>Turn: {typedData.gameTurn}</div>
         {typedData.players.map((player, index) => {
@@ -27,6 +27,7 @@ export default function GameInfo(props: prop) {
             <GameInfoPlayer name={player.name} gold={player.gold} key={index} />
           );
         })}
+        <button className="btn bg-base-300">Enter Game</button>
       </section>
     </>
   );

@@ -9,16 +9,16 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class GameServiceTests {
+public class HostServiceTests {
 
     @Autowired
-    private GameService gameService;
+    private HostService hostService;
 
     @Test
     void shouldBeAbleToDeleteGame() {
-        UUID game = gameService.startNewGame("Some name", "","");
-        gameService.deleteGame(game.toString());
+        UUID game = hostService.startNewGame("Some name", "","");
+        hostService.deleteGame(game.toString());
 
-        assertEquals(0,gameService.getAllGames().size());
+        assertEquals(0, hostService.getAllGames().size());
     }
 }
