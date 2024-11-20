@@ -4,10 +4,14 @@ import Structure from "../structure/structure";
 import { calcMovement } from "./moveCalculator";
 import Shop from "./shop";
 import { calcAttack } from "./attackCalculator";
+import { useContext } from "react";
+import { GameContext } from "../utilities/gameContext";
+import { webAttackUnit } from "../utilities/fetchCommands";
 
 export default function Tile(prop: tileProp) {
   const selected =
     prop.posX == prop.select.xCord && prop.posY == prop.select.yCord;
+  const gameId = useContext(GameContext);
   let canMove = false;
   let canAttack = calcAttack(prop);
   if (canAttack == false) {
@@ -26,21 +30,33 @@ export default function Tile(prop: tileProp) {
     if (prop.select.piece === "shop") {
       return;
     }
-    if (canMove) {
-      prop.moveCallback({ x: prop.posX, y: prop.posY });
-    } else {
-      let selectType = prop.piece.type;
-      if (selectType == "none" && prop.structure.type == "keep") {
-        selectType = "shop";
-      }
-      prop.callback({
-        xCord: prop.posX,
-        yCord: prop.posY,
-        piece: selectType,
-        active: prop.piece.active,
-        owner: prop.piece.owner,
-      });
+    if (canAttack) {
+      await webAttackUnit(
+        {
+          x: prop.select.xCord,
+          y: prop.select.yCord,
+          xTo: prop.posX,
+          yTo: prop.posY,
+        },
+        gameId
+      );
+      return;
     }
+    if (canMove) {
+      await prop.moveCallback({ x: prop.posX, y: prop.posY });
+      return;
+    }
+    let selectType = prop.piece.type;
+    if (selectType == "none" && prop.structure.type == "keep") {
+      selectType = "shop";
+    }
+    prop.callback({
+      xCord: prop.posX,
+      yCord: prop.posY,
+      piece: selectType,
+      active: prop.piece.active,
+      owner: prop.piece.owner,
+    });
   }
   return (
     <>
@@ -66,6 +82,13 @@ export default function Tile(prop: tileProp) {
           <img
             className="z-20 piece absolute pointer-events-none"
             src="src/assets/tiles/selectTile.png"
+            alt=""
+          />
+        )}
+        {canAttack && (
+          <img
+            className="z-20 piece absolute pointer-events-none"
+            src="src/assets/tiles/attackTile.png"
             alt=""
           />
         )}

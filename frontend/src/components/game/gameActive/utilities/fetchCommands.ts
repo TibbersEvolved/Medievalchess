@@ -49,6 +49,7 @@ export async function webBuyUnit(
 }
 
 export async function webAttackUnit(payload: AttackRequest, gameId: string) {
+  console.log("Attack request with payload:", payload);
   return fetch(basepath + "games/attack/" + gameId, {
     method: "POST",
     headers: {

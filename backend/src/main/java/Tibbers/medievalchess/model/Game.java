@@ -194,10 +194,11 @@ public class Game {
         if(fromTile.getPiece() == null || toTile.getPiece() == null){
             return false;
         }
-        if(fromTile.getPiece().getPlayer().getTurnId() == fromTile.getPiece().getPlayer().getTurnId()) {
+        if(fromTile.getPiece().getPlayer().getTurnId() == toTile.getPiece().getPlayer().getTurnId()) {
             return false;
         }
         int attackRange = fromTile.getPiece().getAttackRange();
+
         if(Math.abs(x-xTo) <= attackRange && Math.abs(y-yTo) <= attackRange) {
             toTile.damagePiece(fromTile.getPiece().getType());
             fromTile.getPiece().setActive(0);
