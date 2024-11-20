@@ -14,44 +14,44 @@ public class PieceTests {
 
 
     @Test
-    void archerShouldTake5DamageFromTorch() {
+    void archerShouldTake1DamageFromTorch() {
         Piece piece = new Archer(mockplayer);
         piece.takeDamage("torch");
-        assertEquals(5,piece.getHp());
+        assertEquals(1,piece.getHp());
     }
 
     @Test
-    void archerShouldTake10DamageFromKnight() {
+    void archerShouldTake2DamageFromKnight() {
         Piece piece = new Archer(mockplayer);
         piece.takeDamage("knight");
         assertEquals(0,piece.getHp());
     }
 
     @Test
-    void torchShouldTake5DamageFromTorch() {
+    void torchShouldTake1DamageFromTorch() {
         Piece piece = new Torch(mockplayer);
         piece.takeDamage("torch");
-        assertEquals(5,piece.getHp());
+        assertEquals(1,piece.getHp());
     }
 
     @Test
-    void torchShouldTake10DamageFromArcher() {
+    void torchShouldTake2DamageFromArcher() {
         Piece piece = new Torch(mockplayer);
         piece.takeDamage("archer");
         assertEquals(0,piece.getHp());
     }
 
     @Test
-    void knightShouldTake5DamageFromArcher() {
+    void knightShouldTake1DamageFromArcher() {
         Piece piece = new Knight(mockplayer);
         piece.takeDamage("archer");
-        assertEquals(10,piece.getHp());
+        assertEquals(2,piece.getHp());
     }
 
     @Test
-    void knightShouldTake10DamageFromTorch() {
+    void knightShouldTake2DamageFromTorch() {
         Piece piece = new Knight(mockplayer);
         piece.takeDamage("torch");
-        assertEquals(5,piece.getHp());
+        assertEquals(1,piece.getHp());
     }
 }

@@ -1,5 +1,10 @@
 import GamePiece from "../piece/piece";
-import { gameBoardSelectedTile, pieceType, structureType } from "../gameboard";
+import {
+  defaultSelectedTile,
+  gameBoardSelectedTile,
+  pieceType,
+  structureType,
+} from "../gameboard";
 import Structure from "../structure/structure";
 import { calcMovement } from "./moveCalculator";
 import Shop from "./shop";
@@ -7,10 +12,12 @@ import { calcAttack } from "./attackCalculator";
 import { useContext } from "react";
 import { GameContext } from "../utilities/gameContext";
 import { webAttackUnit } from "../utilities/fetchCommands";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Tile(prop: tileProp) {
   const selected =
     prop.posX == prop.select.xCord && prop.posY == prop.select.yCord;
+  const client = useQueryClient();
   const gameId = useContext(GameContext);
   let canMove = false;
   let canAttack = calcAttack(prop);
@@ -40,6 +47,11 @@ export default function Tile(prop: tileProp) {
         },
         gameId
       );
+      client.invalidateQueries({
+        queryKey: ["activeGame"],
+        refetchType: "all",
+      });
+      prop.callback(defaultSelectedTile);
       return;
     }
     if (canMove) {
@@ -70,14 +82,6 @@ export default function Tile(prop: tileProp) {
         {prop.structure.type != "none" && (
           <Structure owner={prop.structure.owner} type={prop.structure.type} />
         )}
-        {prop.piece.type != "none" && (
-          <GamePiece
-            hp={prop.piece.hp}
-            type={prop.piece.type}
-            owner={prop.piece.owner}
-            active={prop.piece.active}
-          />
-        )}
         {canMove && (
           <img
             className="z-20 piece absolute pointer-events-none"
@@ -90,6 +94,14 @@ export default function Tile(prop: tileProp) {
             className="z-20 piece absolute pointer-events-none"
             src="src/assets/tiles/attackTile.png"
             alt=""
+          />
+        )}
+        {prop.piece.type != "none" && (
+          <GamePiece
+            hp={prop.piece.hp}
+            type={prop.piece.type}
+            owner={prop.piece.owner}
+            active={prop.piece.active}
           />
         )}
         {displayShop && (

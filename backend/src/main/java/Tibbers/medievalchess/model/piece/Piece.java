@@ -20,9 +20,9 @@ public class Piece {
 
     public boolean takeDamage(String dmgType) {
         if(dmgType == weakAgainst) {
-            hp -= 10;
+            hp -= 2;
         } else {
-            hp -= 5;
+            hp -= 1;
         }
         if(hp <= 0) {
             return true;

@@ -5,7 +5,7 @@ import Tibbers.medievalchess.model.Player;
 public class Torch extends Piece{
     public Torch(Player player) {
         super(player);
-        hp = 10;
+        hp = 2;
         type = "torch";
         movementSpeed = 1;
         movementType = "any";
