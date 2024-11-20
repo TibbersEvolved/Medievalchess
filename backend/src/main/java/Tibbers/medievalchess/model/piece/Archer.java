@@ -12,4 +12,15 @@ public class Archer extends Piece{
         weakAgainst = "knight";
         attackRange = 2;
     }
+
+    public static Piece build(Player player){
+        Piece piece = new Piece(player);
+        piece.setHp(2);
+        piece.setType("archer");
+        piece.setMovementSpeed(1);
+        piece.setMovementType("straight");
+        piece.setWeakAgainst("knight");
+        piece.setAttackRange(2);
+        return piece;
+    }
 }

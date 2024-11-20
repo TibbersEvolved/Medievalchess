@@ -13,4 +13,14 @@ public class King extends Piece{
         weakAgainst = "none";
         attackRange = 1;
     }
+    public static Piece build(Player player){
+        Piece piece = new Piece(player);
+        piece.setHp(4);
+        piece.setType("king");
+        piece.setMovementSpeed(1);
+        piece.setMovementType("any");
+        piece.setWeakAgainst("none");
+        piece.setAttackRange(1);
+        return piece;
+    }
 }

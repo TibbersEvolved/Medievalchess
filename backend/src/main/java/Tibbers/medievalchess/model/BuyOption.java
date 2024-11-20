@@ -15,11 +15,11 @@ public class BuyOption {
     public Piece getPiece(Player player) {
         switch (unit) {
             case "knight":
-                return new Knight(player);
+                return Knight.build(player);
             case "torch":
-                return new Torch(player);
+                return Torch.build(player);
             default:
-                return new Archer(player);
+                return Archer.build(player);
         }
     }
 

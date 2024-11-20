@@ -5,7 +5,7 @@ import Tibbers.medievalchess.model.Player;
 public class Town extends Structure{
     public Town(Player player) {
         super(player);
-        income = 20;
+        income = 10;
         type = "town";
     }
 }

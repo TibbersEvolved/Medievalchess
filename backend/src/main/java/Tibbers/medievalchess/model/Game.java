@@ -18,7 +18,6 @@ public class Game {
     private int playerTurn;
     private List<Player> playerList = new ArrayList<>();
     private List<Structure> structures = new ArrayList<>();
-    private List<BuyOption> buyOptions;
 
 
     public static Game newGame(String gameName, String player1, String player2) {
@@ -30,10 +29,7 @@ public class Game {
         game.playerList.add(new Player(player2));
         game.playerList.get(1).setTurnId(1);
         game.tiles = game.getDefaultGameSettings();
-        game.buyOptions = game.seedBuyOptions();
         game.resetPieceMovement();
-        System.out.println(game.buyOptions.toString());
-        System.out.println("Game hosted with id: " + game.getGameId());
         return game;
     }
 
@@ -57,7 +53,7 @@ public class Game {
         playerList.get(playerTurn).gainIncome(gold);
     }
 
-    public boolean buyUnit(int posX, int posY, String type, int playerId) {
+    public boolean buyUnit(int posX, int posY, String type, int playerId, List<BuyOption> buyOptions) {
         if(isTileRangeInvalid(posX,posY)) {
             return false;
         }
@@ -95,14 +91,16 @@ public class Game {
                 tiles[i][j] = new Tile();
             }
         }
-        structures.add(tiles[3][0].setStructure(new Keep(playerList.get(0))));
-        structures.add(tiles[1][1].setStructure(new Town(playerList.get(0))));
-        structures.add(tiles[6][1].setStructure(new Town(playerList.get(0))));
-        structures.add(tiles[4][7].setStructure(new Keep(playerList.get(1))));
-        structures.add(tiles[6][6].setStructure(new Town(playerList.get(1))));
-        structures.add(tiles[1][6].setStructure(new Town(playerList.get(1))));
-        tiles[3][0].setPiece(new King(playerList.get(0)));
-        tiles[4][7].setPiece(new King(playerList.get(1)));
+        structures.add(tiles[3][0].setStructure(Structure.buildKeep(playerList.get(0))));
+        structures.add(tiles[2][1].setStructure(Structure.buildKeep(playerList.get(0))));
+        structures.add(tiles[1][1].setStructure(Structure.buildTown(playerList.get(0))));
+        structures.add(tiles[6][1].setStructure(Structure.buildTown(playerList.get(0))));
+        structures.add(tiles[4][7].setStructure(Structure.buildKeep(playerList.get(1))));
+        structures.add(tiles[5][6].setStructure(Structure.buildKeep(playerList.get(1))));
+        structures.add(tiles[6][6].setStructure(Structure.buildTown(playerList.get(1))));
+        structures.add(tiles[1][6].setStructure(Structure.buildTown(playerList.get(1))));
+        tiles[3][0].setPiece(King.build(playerList.get(0)));
+        tiles[4][7].setPiece(King.build(playerList.get(1)));
         return tiles;
     }
 
@@ -177,13 +175,6 @@ public class Game {
         tileTo.setPiece(piece);
     }
 
-    private List<BuyOption> seedBuyOptions() {
-        List<BuyOption> options = new ArrayList<>();
-        options.add(new BuyOption(20,"archer"));
-        options.add(new BuyOption(15,"torch"));
-        options.add(new BuyOption(30,"knight"));
-        return options;
-    }
 
     public boolean attackUnit(int x, int y, int xTo, int yTo) {
         if(isTileRangeInvalid(x,y) || isTileRangeInvalid(xTo,yTo)) {

@@ -65,6 +65,9 @@ public class Piece {
     public void setActiveNewTurn(int turn) {
         if(player.getTurnId() == turn) {
             active = 2;
+            if(type.equals("king") && hp < 4){
+                hp += 1;
+            }
             return;
         }
         active = 0;
@@ -72,5 +75,29 @@ public class Piece {
 
     public int getAttackRange() {
         return attackRange;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setMovementType(String movementType) {
+        this.movementType = movementType;
+    }
+
+    public void setWeakAgainst(String weakAgainst) {
+        this.weakAgainst = weakAgainst;
+    }
+
+    public void setMovementSpeed(int movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
     }
 }
