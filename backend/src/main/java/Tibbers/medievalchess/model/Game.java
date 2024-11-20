@@ -185,6 +185,27 @@ public class Game {
         return options;
     }
 
+    public boolean attackUnit(int x, int y, int xTo, int yTo) {
+        if(isTileRangeInvalid(x,y) || isTileRangeInvalid(xTo,yTo)) {
+            return false;
+        }
+        Tile fromTile = tiles[y][x];
+        Tile toTile = tiles[yTo][xTo];
+        if(fromTile.getPiece() == null || toTile.getPiece() == null){
+            return false;
+        }
+        if(fromTile.getPiece().getPlayer().getTurnId() == fromTile.getPiece().getPlayer().getTurnId()) {
+            return false;
+        }
+        int attackRange = fromTile.getPiece().getAttackRange();
+        if(Math.abs(x-xTo) <= attackRange && Math.abs(y-yTo) <= attackRange) {
+            toTile.damagePiece(fromTile.getPiece().getType());
+            fromTile.getPiece().setActive(0);
+            return true;
+        }
+        return false;
+    }
+
     private boolean isTileRangeInvalid(int x, int y) {
         return (x < 0 || x > 7 || y < 0 || y > 7);
     }

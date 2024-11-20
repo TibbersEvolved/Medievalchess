@@ -10,5 +10,6 @@ public class Archer extends Piece{
         movementSpeed = 1;
         movementType = "straight";
         weakAgainst = "knight";
+        attackRange = 2;
     }
 }

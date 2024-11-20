@@ -1,6 +1,12 @@
 package Tibbers.medievalchess.http;
 
-import Tibbers.medievalchess.http.dto.*;
+import Tibbers.medievalchess.http.dto.ActiveGame.ActiveGameDto;
+import Tibbers.medievalchess.http.dto.ActiveGame.PieceDto;
+import Tibbers.medievalchess.http.dto.ActiveGame.StructureDto;
+import Tibbers.medievalchess.http.dto.ActiveGame.TileDto;
+import Tibbers.medievalchess.http.dto.Request.RequestAttackDto;
+import Tibbers.medievalchess.http.dto.Request.RequestBuyDto;
+import Tibbers.medievalchess.http.dto.Request.RequestMoveDto;
 import Tibbers.medievalchess.model.Game;
 import Tibbers.medievalchess.model.Tile;
 import Tibbers.medievalchess.model.piece.Piece;
@@ -51,6 +57,14 @@ public class GameController {
     public ResponseEntity buyPiece(@PathVariable String id, @RequestBody RequestBuyDto buyRequest) {
         if (gameService.buyUnit(UUID.fromString(id), buyRequest.x(),
                 buyRequest.y(), buyRequest.type(), buyRequest.playerId()))
+            return ResponseEntity.ok().build();
+        else return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("attack/{id}")
+    public ResponseEntity attackPiece(@PathVariable String id, @RequestBody RequestAttackDto attackDto) {
+        if (gameService.damagePiece(attackDto.x(), attackDto.y(),
+                attackDto.xTo(), attackDto.yTo(), UUID.fromString(id)))
             return ResponseEntity.ok().build();
         else return ResponseEntity.badRequest().build();
     }

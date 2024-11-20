@@ -11,5 +11,6 @@ public class King extends Piece{
         movementSpeed = 1;
         movementType = "any";
         weakAgainst = "none";
+        attackRange = 1;
     }
 }

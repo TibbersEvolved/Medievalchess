@@ -3,11 +3,16 @@ import { gameBoardSelectedTile, pieceType, structureType } from "../gameboard";
 import Structure from "../structure/structure";
 import { calcMovement } from "./moveCalculator";
 import Shop from "./shop";
+import { calcAttack } from "./attackCalculator";
 
 export default function Tile(prop: tileProp) {
   const selected =
     prop.posX == prop.select.xCord && prop.posY == prop.select.yCord;
-  const canMove = calcMovement(prop);
+  let canMove = false;
+  let canAttack = calcAttack(prop);
+  if (canAttack == false) {
+    canMove = calcMovement(prop);
+  }
   let displayShop = false;
   const cords: tileCoordinates = {
     x: prop.posX,
@@ -33,6 +38,7 @@ export default function Tile(prop: tileProp) {
         yCord: prop.posY,
         piece: selectType,
         active: prop.piece.active,
+        owner: prop.piece.owner,
       });
     }
   }

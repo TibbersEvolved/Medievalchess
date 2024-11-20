@@ -11,6 +11,7 @@ public class Piece {
     protected String weakAgainst;
     protected int movementSpeed;
     protected int active;
+    protected int attackRange;
 
     public Piece(Player player) {
         this.player = player;
@@ -67,5 +68,9 @@ public class Piece {
             return;
         }
         active = 0;
+    }
+
+    public int getAttackRange() {
+        return attackRange;
     }
 }

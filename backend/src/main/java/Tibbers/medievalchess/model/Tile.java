@@ -22,6 +22,11 @@ public class Tile {
         }
         return structure.getType();
     }
+    public void damagePiece(String type) {
+        if(piece.takeDamage(type)) {
+            piece = null;
+        }
+    }
 
     public Structure setStructure(Structure structure) {
         this.structure = structure;

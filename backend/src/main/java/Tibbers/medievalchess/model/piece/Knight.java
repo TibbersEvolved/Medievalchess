@@ -10,5 +10,6 @@ public class Knight extends Piece{
         movementSpeed = 2;
         movementType = "straight";
         weakAgainst = "torch";
+        attackRange = 1;
     }
 }

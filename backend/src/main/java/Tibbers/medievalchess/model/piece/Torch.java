@@ -10,5 +10,6 @@ public class Torch extends Piece{
         movementSpeed = 1;
         movementType = "any";
         weakAgainst = "archer";
+        attackRange = 1;
     }
 }

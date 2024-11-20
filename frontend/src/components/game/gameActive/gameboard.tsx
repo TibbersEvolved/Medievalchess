@@ -121,4 +121,5 @@ export type gameBoardSelectedTile = {
   yCord: number;
   piece: string;
   active: number;
+  owner: number;
 };

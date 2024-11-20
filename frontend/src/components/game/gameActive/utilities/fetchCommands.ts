@@ -47,3 +47,20 @@ export async function webBuyUnit(
     body: JSON.stringify(payload),
   });
 }
+
+export async function webAttackUnit(payload: AttackRequest, gameId: string) {
+  return fetch(basepath + "games/attack/" + gameId, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(payload),
+  });
+}
+
+export type AttackRequest = {
+  x: number;
+  y: number;
+  xTo: number;
+  yTo: number;
+};
