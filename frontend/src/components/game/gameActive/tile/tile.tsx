@@ -27,7 +27,6 @@ export default function Tile(prop: tileProp) {
       let selectType = prop.piece.type;
       if (selectType == "none" && prop.structure.type == "keep") {
         selectType = "shop";
-        console.log("selected shop...");
       }
       prop.callback({
         xCord: prop.posX,

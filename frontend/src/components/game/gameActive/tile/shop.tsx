@@ -48,8 +48,8 @@ export default function Shop(prop: shopProp) {
 
   return (
     <>
-      <div className="z-50 ml-12 absolute flex flex-col gap-1 bg-base-300 px-1.5">
-        <div>Shop</div>
+      <div className="z-50 ml-12 absolute flex flex-col gap-1 bg-base-300 p-2 rounded-sm border-solid border-2 border-base-100">
+        <div>Buy Units:</div>
         <ShopItem item={productArcher} callBack={handleBuy} />
         <ShopItem item={productKnight} callBack={handleBuy} />
         <ShopItem item={productTorch} callBack={handleBuy} />

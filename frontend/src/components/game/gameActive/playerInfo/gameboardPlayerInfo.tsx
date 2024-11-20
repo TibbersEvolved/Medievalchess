@@ -31,10 +31,15 @@ export default function GameBoardPlayerInfo(props: prop) {
         <div>Turn: {typedData.gameTurn}</div>
         {typedData.players.map((player, index) => {
           return (
-            <GameInfoPlayer name={player.name} gold={player.gold} key={index} />
+            <GameInfoPlayer
+              name={player.name}
+              gold={player.gold}
+              key={index}
+              currentTurn={typedData.playerTurn == index}
+            />
           );
         })}
-        <button className="btn bg-base-300" onClick={endTurn}>
+        <button className="btn bg-accent" onClick={endTurn}>
           End Turn
         </button>
       </section>

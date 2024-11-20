@@ -4,7 +4,7 @@ import Tile, { tileCoordinates } from "./tile/tile";
 import GameBoardPlayerInfo from "./playerInfo/gameboardPlayerInfo";
 import { useEffect, useState } from "react";
 import { webPieceMove } from "./utilities/fetchCommands";
-import { GameContext } from "./utilities/gameContext";
+import { GameContext, PlayerTurnContext } from "./utilities/gameContext";
 
 export const defaultSelectedTile: gameBoardSelectedTile = {
   xCord: 0,
