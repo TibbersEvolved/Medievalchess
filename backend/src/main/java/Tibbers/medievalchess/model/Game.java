@@ -168,6 +168,11 @@ public class Game {
     private void swapPiece(Tile tileFrom, Tile tileTo) {
         Piece piece = tileFrom.getPiece();
         piece.setActive(1);
+        if (piece.getType().equals("king")) {
+            if (!(tileTo.getStructureType().equals("none"))) {
+                tileTo.getStructure().setPlayer(piece.getPlayer());
+            }
+        }
         tileFrom.setPiece(null);
         tileTo.setPiece(piece);
     }

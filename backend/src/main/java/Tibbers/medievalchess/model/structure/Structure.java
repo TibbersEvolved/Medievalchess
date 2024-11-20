@@ -26,4 +26,8 @@ public class Structure {
     public String getType() {
         return type;
     }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

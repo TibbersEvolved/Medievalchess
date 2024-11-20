@@ -16,6 +16,12 @@ public class Tile {
     public Structure getStructure() {
         return structure;
     }
+    public String getStructureType() {
+        if(structure == null) {
+            return "none";
+        }
+        return structure.getType();
+    }
 
     public Structure setStructure(Structure structure) {
         this.structure = structure;
