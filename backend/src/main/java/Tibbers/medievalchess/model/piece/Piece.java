@@ -1,10 +1,20 @@
 package Tibbers.medievalchess.model.piece;
 
 import Tibbers.medievalchess.model.Player;
+import Tibbers.medievalchess.model.Tile;
+import jakarta.persistence.*;
 
+@Entity
 public class Piece {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected long id;
+
+    @ManyToOne
+    @JoinColumn(name = "player")
     protected Player player;
-    protected int id;
+    @OneToOne(mappedBy = "piece")
+    private Tile tile;
     protected int hp;
     protected String type;
     protected String movementType;
@@ -13,9 +23,13 @@ public class Piece {
     protected int active;
     protected int attackRange;
 
+
     public Piece(Player player) {
         this.player = player;
         active = 0;
+    }
+
+    public Piece() {
     }
 
     public boolean takeDamage(String dmgType) {

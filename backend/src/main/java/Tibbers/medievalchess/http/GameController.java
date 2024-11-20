@@ -73,12 +73,13 @@ public class GameController {
 
     private ActiveGameDto getGameDtoFromGame(Game game) {
         List<TileDto> tileDtoList = new ArrayList<>();
-        Tile[][] tiles = game.getTiles();
-        for(int i = 0; i < tiles.length; i++) {
-            for(int j = 0; j < tiles[i].length; j++) {
-                PieceDto piece = buildPieceDto(tiles[i][j]);
-                StructureDto structure = buildStructureDto(tiles[i][j]);
-                tileDtoList.add(new TileDto(j,i,piece,structure));
+        List<Tile> tiles = game.getTiles();
+        for(int i = 0; i < tiles.size(); i++) {
+            {
+                Tile t = tiles.get(i);
+                PieceDto piece = buildPieceDto(t);
+                StructureDto structure = buildStructureDto(t);
+                tileDtoList.add(new TileDto(t.getX(),t.getY(),piece,structure));
             }
         }
         return new ActiveGameDto(tileDtoList);

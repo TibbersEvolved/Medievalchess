@@ -5,19 +5,33 @@ import Tibbers.medievalchess.model.piece.Piece;
 import Tibbers.medievalchess.model.structure.Keep;
 import Tibbers.medievalchess.model.structure.Structure;
 import Tibbers.medievalchess.model.structure.Town;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Array;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+@Entity
 public class Game {
-    private Tile[][] tiles;
+
+
+    @OneToMany(mappedBy = "game")
+    private List<Tile> tiles = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID gameId;
     private String gameName;
     private int turn;
     private int playerTurn;
+    @OneToMany(mappedBy = "game")
     private List<Player> playerList = new ArrayList<>();
+    @OneToMany(mappedBy = "game")
     private List<Structure> structures = new ArrayList<>();
+
+    public Game() {
+    }
 
 
     public static Game newGame(String gameName, String player1, String player2) {
@@ -28,7 +42,8 @@ public class Game {
         game.playerList.get(0).setTurnId(0);
         game.playerList.add(new Player(player2));
         game.playerList.get(1).setTurnId(1);
-        game.tiles = game.getDefaultGameSettings();
+        game.tiles = game.generateBoard();
+        game.generateDefaultUnits();
         game.resetPieceMovement();
         return game;
     }
@@ -57,7 +72,7 @@ public class Game {
         if(isTileRangeInvalid(posX,posY)) {
             return false;
         }
-        Tile tile = tiles[posY][posX];
+        Tile tile = tileAt(posX,posY);
         if (tile.getStructure() == null) {
             return false;
         }
@@ -84,24 +99,21 @@ public class Game {
     }
 
 
-    private Tile[][] getDefaultGameSettings() {
-        Tile[][] tiles = new Tile[8][8];
+    private List<Tile> generateBoard() {
+        List<Tile> defTiles = new ArrayList<>();
         for(int i = 0; i < 8; i++) {
             for(int j = 0; j < 8; j++) {
-                tiles[i][j] = new Tile();
+                defTiles.add(new Tile(j,i));
             }
         }
-        structures.add(tiles[3][0].setStructure(Structure.buildKeep(playerList.get(0))));
-        structures.add(tiles[2][1].setStructure(Structure.buildKeep(playerList.get(0))));
-        structures.add(tiles[1][1].setStructure(Structure.buildTown(playerList.get(0))));
-        structures.add(tiles[6][1].setStructure(Structure.buildTown(playerList.get(0))));
-        structures.add(tiles[4][7].setStructure(Structure.buildKeep(playerList.get(1))));
-        structures.add(tiles[5][6].setStructure(Structure.buildKeep(playerList.get(1))));
-        structures.add(tiles[6][6].setStructure(Structure.buildTown(playerList.get(1))));
-        structures.add(tiles[1][6].setStructure(Structure.buildTown(playerList.get(1))));
-        tiles[3][0].setPiece(King.build(playerList.get(0)));
-        tiles[4][7].setPiece(King.build(playerList.get(1)));
-        return tiles;
+        return defTiles;
+    }
+
+    private void generateDefaultUnits() {
+        tileAt(0,3).setPiece(King.build(getPlayer(0)));
+        structures.add(tileAt(0,3).setStructure(Keep.buildKeep(getPlayer(0))));
+        tileAt(7,4).setPiece(King.build(getPlayer(1)));
+        structures.add(tileAt(7,4).setStructure(Keep.buildKeep(getPlayer(1))));
     }
 
     public int getPlayerTurn() {
@@ -124,7 +136,7 @@ public class Game {
         return turn;
     }
 
-    public Tile[][] getTiles() {
+    public List<Tile> getTiles() {
         return tiles;
     }
 
@@ -132,11 +144,11 @@ public class Game {
         if(isTileRangeInvalid(startX, startY) || isTileRangeInvalid(targetX, targetY)) {
             return false;
         }
-        Tile targetTile = tiles[targetY][targetX];
+        Tile targetTile = tileAt(targetX,targetY);
         if(targetTile.getPiece() != null ) {
             return false;
         }
-        Tile fromTile = tiles[startY][startX];
+        Tile fromTile = tileAt(startX,startY);
         if(fromTile.getPiece() == null){
             return false;
         }
@@ -180,8 +192,8 @@ public class Game {
         if(isTileRangeInvalid(x,y) || isTileRangeInvalid(xTo,yTo)) {
             return false;
         }
-        Tile fromTile = tiles[y][x];
-        Tile toTile = tiles[yTo][xTo];
+        Tile fromTile = tileAt(x,y);
+        Tile toTile = tileAt(xTo,yTo);
         if(fromTile.getPiece() == null || toTile.getPiece() == null){
             return false;
         }
@@ -202,14 +214,24 @@ public class Game {
         return (x < 0 || x > 7 || y < 0 || y > 7);
     }
 
+    private Tile tileAt(int x, int y) {
+        Optional<Tile> t = tiles.stream()
+                .filter(tile -> tile.getX() == x)
+                .filter(tile -> tile.getY() == y)
+                .findFirst();
+        if(t.isPresent()){
+            return t.get();
+        }
+        return null;
+    }
+
     private void resetPieceMovement() {
-        for(int i = 0; i < tiles.length; i++) {
-            for(int j = 0; j < tiles[i].length; j++) {
-                Piece p = tiles[i][j].getPiece();
-                if (p != null) {
-                    p.setActiveNewTurn(playerTurn);
-                }
+        for(Tile tile : tiles) {
+            Piece p = tile.getPiece();
+            if(p != null) {
+                p.setActiveNewTurn(playerTurn);
             }
         }
+
     }
 }

@@ -1,0 +1,32 @@
+debug: true
+server:
+  port: ${PORT:8080}
+spring:
+  sql:
+    init:
+      platform: postgresql
+      mode: always
+
+  output:
+      ansi:
+        enabled: always
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chessDv
+    username: ${DB_SALT:tibbers}
+    password: ${DB_PASSWORD:ultimate}
+
+
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR

@@ -2,16 +2,7 @@ package Tibbers.medievalchess.model.piece;
 
 import Tibbers.medievalchess.model.Player;
 
-public class Torch extends Piece{
-    public Torch(Player player) {
-        super(player);
-        hp = 2;
-        type = "torch";
-        movementSpeed = 1;
-        movementType = "any";
-        weakAgainst = "archer";
-        attackRange = 1;
-    }
+public class Torch {
 
     public static Piece build(Player player){
         Piece piece = new Piece(player);
