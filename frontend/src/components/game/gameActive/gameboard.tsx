@@ -30,10 +30,11 @@ export default function GameBoard(props: boardProp) {
       tileTo.x,
       tileTo.y
     );
-    client.invalidateQueries({
+    await client.invalidateQueries({
       queryKey: ["activeGame"],
       refetchType: "all",
     });
+    setSelectedTile(defaultSelectedTile);
   }
 
   function boardRend(tiles: tileType[]) {

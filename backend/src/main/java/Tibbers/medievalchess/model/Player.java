@@ -19,6 +19,15 @@ public class Player {
         return gold;
     }
 
+    public boolean spendGold(int amount) {
+        if(gold >= amount) {
+            gold -= amount;
+            return true;
+        }
+        return false;
+    }
+
+
     public String getName() {
         return name;
     }

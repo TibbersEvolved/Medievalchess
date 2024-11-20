@@ -18,6 +18,7 @@ public class Game {
     private int playerTurn;
     private List<Player> playerList = new ArrayList<>();
     private List<Structure> structures = new ArrayList<>();
+    private List<BuyOption> buyOptions;
 
 
     public static Game newGame(String gameName, String player1, String player2) {
@@ -29,6 +30,7 @@ public class Game {
         game.playerList.add(new Player(player2));
         game.playerList.get(1).setTurnId(1);
         game.tiles = game.getDefaultGameSettings();
+        game.buyOptions = game.seedBuyOptions();
         game.resetPieceMovement();
         return game;
     }
@@ -37,6 +39,7 @@ public class Game {
         this.gameId = UUID.randomUUID();
         this.gameName = name;
     }
+
 
     public void endTurn() {
         turn += 1;
@@ -50,6 +53,31 @@ public class Game {
         }
         resetPieceMovement();
         playerList.get(playerTurn).gainIncome(gold);
+    }
+
+    public boolean buyUnit(int posX, int posY, String type, int playerId) {
+        if(isTileRangeInvalid(posX,posY)) {
+            return false;
+        }
+        Tile tile = tiles[posY][posX];
+        if (tile.getStructure() == null) {
+            return false;
+        }
+        if (tile.getPiece() != null) {
+            return false;
+        }
+        if (tile.getStructure().getType() != "keep") {
+            return false;
+        }
+        Player player = getPlayer(playerId);
+        List<BuyOption> buyOpt = buyOptions.stream()
+                .filter(b -> b.getUnit() == type)
+                .toList();
+        if (player.spendGold(buyOpt.get(0).getCost())) {
+            tile.setPiece(buyOpt.get(0).getPiece(player));
+            return true;
+        }
+        return false;
     }
 
 
@@ -96,8 +124,7 @@ public class Game {
     }
 
     public boolean moveUnit (int startX, int startY, int targetX, int targetY) {
-        if(startX < 0 || startX > 7 || startY < 0 || startY > 7
-                ||targetX < 0 || targetX > 7||targetY < 0 || targetY > 7) {
+        if(isTileRangeInvalid(startX, startY) || isTileRangeInvalid(targetX, targetY)) {
             return false;
         }
         Tile targetTile = tiles[targetY][targetX];
@@ -135,6 +162,18 @@ public class Game {
         Piece piece = tileFrom.getPiece();
         tileFrom.setPiece(null);
         tileTo.setPiece(piece);
+    }
+
+    private List<BuyOption> seedBuyOptions() {
+        List<BuyOption> options = new ArrayList<>();
+        options.add(new BuyOption(20,"archer"));
+        options.add(new BuyOption(15,"torch"));
+        options.add(new BuyOption(30,"knight"));
+        return options;
+    }
+
+    private boolean isTileRangeInvalid(int x, int y) {
+        return (x < 0 || x > 7 || y < 0 || y > 7);
     }
 
     private void resetPieceMovement() {

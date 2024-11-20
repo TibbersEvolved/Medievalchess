@@ -1,7 +1,16 @@
 import { tileProp } from "./tile";
 
 export function calcMovement(data: tileProp): boolean {
-  if (data.select.piece === "none" || data.select.active === 0) return false;
+  if (
+    data.select.piece === "none" ||
+    data.select.piece === "shop" ||
+    data.select.active === 0
+  ) {
+    return false;
+  }
+  if (data.select.xCord == data.posX && data.select.yCord == data.posY) {
+    return false;
+  }
   const piece = getPieceInfo(data.select.piece);
   const x = data.select.xCord;
   const y = data.select.yCord;

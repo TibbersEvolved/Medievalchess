@@ -6,6 +6,9 @@ import { calcMovement } from "./moveCalculator";
 export default function Tile(prop: tileProp) {
   const canMove = calcMovement(prop);
   async function handleSelect() {
+    if (prop.select.piece === "shop") {
+      return;
+    }
     if (canMove) {
       prop.moveCallback({ x: prop.posX, y: prop.posY });
     } else {

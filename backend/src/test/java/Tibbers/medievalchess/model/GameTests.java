@@ -47,4 +47,15 @@ public class GameTests {
         assertEquals(null, empty);
         assertNotEquals(null, king);
     }
+
+    @Test
+    void shouldBeAbleToBuyArcher() {
+        Game game = Game.newGame("test","","");
+        game.moveUnit(0,3,1,3);
+        game.getPlayer(0).gainIncome(50);
+        game.buyUnit(0,3,"archer",0);
+        Tile[][] tiles = game.getTiles();
+        Piece archer = tiles[3][0].getPiece();
+        assertEquals("archer",archer.getType());
+    }
 }
