@@ -10,11 +10,11 @@ public class Piece {
     protected String movementType;
     protected String weakAgainst;
     protected int movementSpeed;
-    protected boolean active;
+    protected int active;
 
     public Piece(Player player) {
         this.player = player;
-        active = false;
+        active = 0;
     }
 
     public boolean takeDamage(String dmgType) {
@@ -53,11 +53,20 @@ public class Piece {
         return player;
     }
 
-    public boolean isActive() {
+    public int isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(int active) {
         this.active = active;
+    }
+
+    public void setActiveNewTurn(int turn) {
+        if(player.getTurnId() == turn) {
+            active = 2;
+            return;
+        }
+        active = 0;
+
     }
 }

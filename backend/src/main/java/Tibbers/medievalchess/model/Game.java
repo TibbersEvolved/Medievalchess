@@ -29,6 +29,7 @@ public class Game {
         game.playerList.add(new Player(player2));
         game.playerList.get(1).setTurnId(1);
         game.tiles = game.getDefaultGameSettings();
+        game.resetPieceMovement();
         return game;
     }
 
@@ -47,6 +48,7 @@ public class Game {
         for(int i = 0; i < structures.size(); i++) {
             gold += structures.get(i).getIncome(playerList.get(playerTurn));
         }
+        resetPieceMovement();
         playerList.get(playerTurn).gainIncome(gold);
     }
 
@@ -93,37 +95,56 @@ public class Game {
         return tiles;
     }
 
-    public void moveUnit (int startX, int startY, int targetX, int targetY) {
+    public boolean moveUnit (int startX, int startY, int targetX, int targetY) {
         if(startX < 0 || startX > 7 || startY < 0 || startY > 7
                 ||targetX < 0 || targetX > 7||targetY < 0 || targetY > 7) {
-            return;
+            return false;
         }
         Tile targetTile = tiles[targetY][targetX];
-        if(targetTile.getPiece() != null) {
-            return;
+        if(targetTile.getPiece() != null ) {
+            return false;
         }
-        Tile fromTile = tiles[startY][startY];
+        Tile fromTile = tiles[startY][startX];
+        if(fromTile.getPiece() == null){
+            return false;
+        }
+        if(fromTile.getPiece().isActive() != 2) {
+            return false;
+        }
         int moveSpeed = fromTile.getPiece().getMovementSpeed();
         if(fromTile.getPiece().getMovementType() == "any") {
             if(Math.abs(startX-targetX) <= moveSpeed && Math.abs(startY-targetY) <= moveSpeed) {
                 swapPiece(fromTile,targetTile);
-                return;
+                return true;
             }
         }
         if (fromTile.getPiece().getMovementType() == "straight"){
             if(startX == targetX && Math.abs(startY - targetY) <= moveSpeed){
                     swapPiece(fromTile,targetTile);
-                    return;
+                    return true;
             }
             if (startY == targetY && Math.abs(startX - targetX) <= moveSpeed) {
                 swapPiece(fromTile,targetTile);
+                return true;
             }
         }
+        return false;
     }
 
     private void swapPiece(Tile tileFrom, Tile tileTo) {
         Piece piece = tileFrom.getPiece();
         tileFrom.setPiece(null);
         tileTo.setPiece(piece);
+    }
+
+    private void resetPieceMovement() {
+        for(int i = 0; i < tiles.length; i++) {
+            for(int j = 0; j < tiles[i].length; j++) {
+                Piece p = tiles[i][j].getPiece();
+                if (p != null) {
+                    p.setActiveNewTurn(playerTurn);
+                }
+            }
+        }
     }
 }

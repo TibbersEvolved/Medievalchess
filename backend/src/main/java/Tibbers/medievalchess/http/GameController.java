@@ -1,9 +1,6 @@
 package Tibbers.medievalchess.http;
 
-import Tibbers.medievalchess.http.dto.ActiveGameDto;
-import Tibbers.medievalchess.http.dto.PieceDto;
-import Tibbers.medievalchess.http.dto.StructureDto;
-import Tibbers.medievalchess.http.dto.TileDto;
+import Tibbers.medievalchess.http.dto.*;
 import Tibbers.medievalchess.model.Game;
 import Tibbers.medievalchess.model.Tile;
 import Tibbers.medievalchess.model.piece.Piece;
@@ -42,6 +39,13 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("move/{id}")
+    public ResponseEntity movePiece(@PathVariable String id, @RequestBody MoveRequestDto moveRequest) {
+        if (gameService.movePiece(UUID.fromString(id),moveRequest.xFrom(),moveRequest.yFrom(),moveRequest.xTo(),moveRequest.yTo()))
+        return ResponseEntity.ok().build();
+        else return ResponseEntity.badRequest().build();
+    }
+
 
 
     private ActiveGameDto getGameDtoFromGame(Game game) {
@@ -51,14 +55,14 @@ public class GameController {
             for(int j = 0; j < tiles[i].length; j++) {
                 PieceDto piece = buildPieceDto(tiles[i][j]);
                 StructureDto structure = buildStructureDto(tiles[i][j]);
-                tileDtoList.add(new TileDto(i,j,piece,structure));
+                tileDtoList.add(new TileDto(j,i,piece,structure));
             }
         }
         return new ActiveGameDto(tileDtoList);
     }
 
     private PieceDto getEmptyPieceDto() {
-        return new PieceDto("none",false,0,0);
+        return new PieceDto("none",0,0,0);
     }
 
     private StructureDto getEmptyStructureDto() {

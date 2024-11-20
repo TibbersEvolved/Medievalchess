@@ -3,7 +3,7 @@ import { structureType } from "../gameboard";
 export default function Structure(props: structureType) {
   return (
     <img
-      className="absolute piece z-20 pointer-events-none"
+      className="absolute piece z-30 pointer-events-none"
       src={getStructureImage(props.type, props.owner)}
     ></img>
   );

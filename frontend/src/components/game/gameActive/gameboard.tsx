@@ -1,17 +1,40 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { basepath } from "../../../utilities/backendPaths";
-import Tile from "./tile/tile";
+import Tile, { tileCoordinates } from "./tile/tile";
 import GameBoardPlayerInfo from "./playerInfo/gameboardPlayerInfo";
 import { useEffect, useState } from "react";
+import { webPieceMove } from "./utilities/fetchCommands";
+
+const defaultSelectedTile: gameBoardSelectedTile = {
+  xCord: 0,
+  yCord: 0,
+  piece: "none",
+  active: 0,
+};
 
 export default function GameBoard(props: boardProp) {
   const [updateGame, setUpdateGame] = useState(0);
+  const [seletedTile, setSelectedTile] = useState(defaultSelectedTile);
   const client = useQueryClient();
   const [oldData, setOldData] = useState<tileType[]>();
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["activeGame", updateGame],
     queryFn: () => fetchInfo(props.id),
   });
+
+  async function handleMove(tileTo: tileCoordinates) {
+    await webPieceMove(
+      props.id,
+      seletedTile.xCord,
+      seletedTile.yCord,
+      tileTo.x,
+      tileTo.y
+    );
+    client.invalidateQueries({
+      queryKey: ["activeGame"],
+      refetchType: "all",
+    });
+  }
 
   function boardRend(tiles: tileType[]) {
     return (
@@ -26,6 +49,9 @@ export default function GameBoard(props: boardProp) {
                   piece={tile.piece}
                   structure={tile.structure}
                   key={index}
+                  select={seletedTile}
+                  callback={(e) => setSelectedTile(e)}
+                  moveCallback={handleMove}
                 />
               );
             })}
@@ -68,7 +94,7 @@ type boardProp = {
 };
 
 export type pieceType = {
-  active: boolean;
+  active: number;
   hp: number;
   owner: number;
   type: string;
@@ -84,4 +110,11 @@ type tileType = {
   structure: structureType;
   xCord: number;
   yCord: number;
+};
+
+export type gameBoardSelectedTile = {
+  xCord: number;
+  yCord: number;
+  piece: string;
+  active: number;
 };
