@@ -17,8 +17,29 @@ export async function webPieceMove(
     xTo: xTo,
     yTo: yTo,
   };
-  console.log("Sending post with payload:", payload);
   return fetch(basepath + "games/move/" + id, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function webBuyUnit(
+  x: number,
+  y: number,
+  type: string,
+  playerId: number,
+  gameId: string
+) {
+  const payload = {
+    x: x,
+    y: y,
+    type: type,
+    playerId: playerId,
+  };
+  return fetch(basepath + "games/buy/" + gameId, {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",

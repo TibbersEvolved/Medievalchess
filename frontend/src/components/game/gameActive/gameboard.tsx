@@ -4,8 +4,9 @@ import Tile, { tileCoordinates } from "./tile/tile";
 import GameBoardPlayerInfo from "./playerInfo/gameboardPlayerInfo";
 import { useEffect, useState } from "react";
 import { webPieceMove } from "./utilities/fetchCommands";
+import { GameContext } from "./utilities/gameContext";
 
-const defaultSelectedTile: gameBoardSelectedTile = {
+export const defaultSelectedTile: gameBoardSelectedTile = {
   xCord: 0,
   yCord: 0,
   piece: "none",
@@ -40,38 +41,40 @@ export default function GameBoard(props: boardProp) {
   function boardRend(tiles: tileType[]) {
     return (
       <>
-        <section className="mx-auto w-fit flex flex-row">
-          <section className="gameGrid">
-            {tiles.map((tile, index) => {
-              return (
-                <Tile
-                  posX={tile.xCord}
-                  posY={tile.yCord}
-                  piece={tile.piece}
-                  structure={tile.structure}
-                  key={index}
-                  select={seletedTile}
-                  callback={(e) => setSelectedTile(e)}
-                  moveCallback={handleMove}
-                />
-              );
-            })}
+        <GameContext.Provider value={props.id}>
+          <section className="mx-auto w-fit flex flex-row">
+            <section className="gameGrid">
+              {tiles.map((tile, index) => {
+                return (
+                  <Tile
+                    posX={tile.xCord}
+                    posY={tile.yCord}
+                    piece={tile.piece}
+                    structure={tile.structure}
+                    key={index}
+                    select={seletedTile}
+                    callback={(e) => setSelectedTile(e)}
+                    moveCallback={handleMove}
+                  />
+                );
+              })}
+            </section>
+            <GameBoardPlayerInfo
+              id={props.id}
+              cb={() => {
+                client.invalidateQueries({
+                  queryKey: ["boardGameInfo"],
+                  refetchType: "all",
+                });
+                setOldData(tiles);
+                client.invalidateQueries({
+                  queryKey: ["activeGame"],
+                  refetchType: "all",
+                });
+              }}
+            />
           </section>
-          <GameBoardPlayerInfo
-            id={props.id}
-            cb={() => {
-              client.invalidateQueries({
-                queryKey: ["boardGameInfo"],
-                refetchType: "all",
-              });
-              setOldData(tiles);
-              client.invalidateQueries({
-                queryKey: ["activeGame"],
-                refetchType: "all",
-              });
-            }}
-          />
-        </section>
+        </GameContext.Provider>
       </>
     );
   }
