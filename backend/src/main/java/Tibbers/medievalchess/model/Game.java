@@ -32,6 +32,8 @@ public class Game {
         game.tiles = game.getDefaultGameSettings();
         game.buyOptions = game.seedBuyOptions();
         game.resetPieceMovement();
+        System.out.println(game.buyOptions.toString());
+        System.out.println("Game hosted with id: " + game.getGameId());
         return game;
     }
 
@@ -69,12 +71,17 @@ public class Game {
         if (tile.getStructure().getType() != "keep") {
             return false;
         }
+        buyOptions.forEach(s -> System.out.println(s.getUnit()));
         Player player = getPlayer(playerId);
-        List<BuyOption> buyOpt = buyOptions.stream()
-                .filter(b -> b.getUnit() == type)
-                .toList();
-        if (player.spendGold(buyOpt.get(0).getCost())) {
-            tile.setPiece(buyOpt.get(0).getPiece(player));
+        BuyOption buyOpt = null;
+        for(int i = 0; i < buyOptions.size(); i++){
+            if(buyOptions.get(i).getUnit().equals(type)){
+                buyOpt = buyOptions.get(i);
+            }
+        }
+        System.out.println("buyOpt = " + buyOpt);
+        if (player.spendGold(buyOpt.getCost())) {
+            tile.setPiece(buyOpt.getPiece(player));
             return true;
         }
         return false;

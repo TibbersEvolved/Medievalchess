@@ -40,9 +40,18 @@ public class GameController {
     }
 
     @PostMapping("move/{id}")
-    public ResponseEntity movePiece(@PathVariable String id, @RequestBody MoveRequestDto moveRequest) {
-        if (gameService.movePiece(UUID.fromString(id),moveRequest.xFrom(),moveRequest.yFrom(),moveRequest.xTo(),moveRequest.yTo()))
+    public ResponseEntity movePiece(@PathVariable String id, @RequestBody RequestMoveDto moveRequest) {
+        if (gameService.movePiece(UUID.fromString(id),
+                moveRequest.xFrom(),moveRequest.yFrom(),moveRequest.xTo(),moveRequest.yTo()))
         return ResponseEntity.ok().build();
+        else return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("buy/{id}")
+    public ResponseEntity buyPiece(@PathVariable String id, @RequestBody RequestBuyDto buyRequest) {
+        if (gameService.buyUnit(UUID.fromString(id), buyRequest.x(),
+                buyRequest.y(), buyRequest.type(), buyRequest.playerId()))
+            return ResponseEntity.ok().build();
         else return ResponseEntity.badRequest().build();
     }
 
