@@ -7,7 +7,7 @@ public class Knight extends Piece{
         super(player);
         hp = 15;
         type = "knight";
-        movementSpeed = 1;
+        movementSpeed = 2;
         movementType = "straight";
         weakAgainst = "torch";
     }

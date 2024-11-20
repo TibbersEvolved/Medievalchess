@@ -167,6 +167,7 @@ public class Game {
 
     private void swapPiece(Tile tileFrom, Tile tileTo) {
         Piece piece = tileFrom.getPiece();
+        piece.setActive(1);
         tileFrom.setPiece(null);
         tileTo.setPiece(piece);
     }

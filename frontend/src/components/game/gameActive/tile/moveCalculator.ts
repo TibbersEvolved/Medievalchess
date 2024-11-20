@@ -4,7 +4,8 @@ export function calcMovement(data: tileProp): boolean {
   if (
     data.select.piece === "none" ||
     data.select.piece === "shop" ||
-    data.select.active === 0
+    data.select.active != 2 ||
+    data.piece.type != "none"
   ) {
     return false;
   }
@@ -54,7 +55,7 @@ function getPieceInfo(piece: string): pieceInfo {
   }
   if (piece === "knight") {
     return {
-      movement: 1,
+      movement: 2,
       type: "straight",
     };
   }

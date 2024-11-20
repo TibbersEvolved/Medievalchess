@@ -67,6 +67,5 @@ public class Piece {
             return;
         }
         active = 0;
-
     }
 }
