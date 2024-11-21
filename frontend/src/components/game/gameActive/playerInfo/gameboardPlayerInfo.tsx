@@ -39,7 +39,7 @@ export default function GameBoardPlayerInfo(props: prop) {
             />
           );
         })}
-        <button className="btn bg-accent" onClick={endTurn}>
+        <button className="btn bg-warning mt-2 shadow-md" onClick={endTurn}>
           End Turn
         </button>
       </section>

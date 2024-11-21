@@ -1,8 +1,8 @@
 import { playerData } from "./gameInfo";
 
 export default function GameInfoPlayer(props: playerData) {
-  let color = "bg-primary";
-  if (props.currentTurn) color = "bg-green-500 font-bold";
+  let color = "shadow-md bg-primary";
+  if (props.currentTurn) color = "bg-base-100 shadow-md font-bold";
   return (
     <>
       <section className={"flex flex-col gap-2 p-1 rounded-sm " + color}>

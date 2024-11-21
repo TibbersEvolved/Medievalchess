@@ -43,7 +43,7 @@ export default function GameBoard(props: boardProp) {
     return (
       <>
         <GameContext.Provider value={props.id}>
-          <section className="mx-auto w-fit flex flex-row">
+          <section className="mx-auto w-fit flex flex-row shadow-md">
             <section className="gameGrid">
               {tiles.map((tile, index) => {
                 return (

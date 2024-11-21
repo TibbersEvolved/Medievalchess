@@ -30,7 +30,7 @@ export default function GameInfo(props: prop) {
 
   return (
     <>
-      <section className="flex flex-col gap-2 bg-base-200 p-3 rounded-sm min-w-80">
+      <section className="flex flex-col gap-2 bg-base-200 p-3 rounded-sm min-w-80 shadow-md">
         <div className="font-extrabold">{typedData.gameName}</div>
         <div>Turn: {typedData.gameTurn}</div>
         {typedData.players.map((player, index) => {
@@ -43,10 +43,16 @@ export default function GameInfo(props: prop) {
             />
           );
         })}
-        <button className="btn bg-base-300" onClick={props.cb}>
+        <button
+          className="btn bg-base-300 text-lg shadow-sm"
+          onClick={props.cb}
+        >
           Enter Game
         </button>
-        <button className="btn btn-warning" onClick={handleDelete}>
+        <button
+          className="btn btn-warning text-lg shadow-sm"
+          onClick={handleDelete}
+        >
           Abandon Game
         </button>
       </section>
