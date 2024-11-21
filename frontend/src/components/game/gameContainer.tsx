@@ -14,7 +14,6 @@ export default function GameContainer() {
   function handleModeChange(input: string) {
     setSelectedGame(input);
     setActiveGame(1);
-    console.log("Hey I did it!");
   }
   if (activeGame == 1)
     return (
@@ -26,7 +25,7 @@ export default function GameContainer() {
     );
   return (
     <>
-      <section className="flex flex-col gap-4 ml-4">
+      <section className="flex flex-col gap-4 ml-4 text-xl font-bold">
         {" "}
         My games
         <ListGameSelect callback={handleModeChange} />

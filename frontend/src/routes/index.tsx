@@ -2,6 +2,7 @@ import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import GameInfoPlayer from "../components/game/gameSelect/gameInfoPlayer";
 import GameInfo from "../components/game/gameSelect/gameInfo";
+import IndexImage from "../components/index/indexImage";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
@@ -12,42 +13,42 @@ function HomeComponent() {
     <div className="p-2 text-center">
       <h3 className="text-4xl">Welcome to Medieval Chess!</h3>
       <section className="mt-3 mx-5">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio itaque
-        amet eum omnis repellat, nostrum nam modi, ipsum qui minima odit quis
-        est saepe cupiditate nemo fugiat quod ipsam ea? Quae doloremque at
-        exercitationem, suscipit id, quibusdam provident nisi quia natus ipsam
-        harum officiis doloribus veritatis cumque praesentium consequuntur,
-        culpa assumenda eligendi tempore molestiae maiores eius. Vero doloremque
-        doloribus iure? Quae totam doloribus obcaecati libero veniam, tempore,
-        odit impedit nesciunt commodi, ratione autem est asperiores corporis
-        dolores amet? Ipsa, expedita? At aliquid accusamus animi est natus
-        expedita eos ducimus odit. Vero necessitatibus maxime adipisci?
-        Excepturi obcaecati rerum atque, quaerat magnam hic, consequatur, quidem
-        adipisci dolore error unde tempora nostrum! Est pariatur magnam fugit
-        veniam cum temporibus voluptates, deserunt laboriosam accusamus?
-        Nostrum, quaerat? At obcaecati aut eligendi sequi, assumenda omnis est
-        quam eum exercitationem eius vitae quaerat unde ad veniam nisi in
-        molestias numquam error quod blanditiis minus. Voluptates, molestias
-        ipsam?
+        Overview: Dive into the thrilling world of Medieval Chess, a turn-based
+        strategy game that combines the tactical depth of chess with the dynamic
+        resource management of a medieval battlefield. Plan your moves, control
+        key territories, and expand your army to overthrow your opponent’s king.
+        Each turn is a chance to gain an edge or fall prey to a cunning
+        counterattack. Will you risk your king to claim vital resources, or will
+        you build an impenetrable fortress? The choice is yours.
+      </section>
+      <section className="flex flex-row gap-8 justify-center mt-3">
+        <IndexImage imageUrl="src\assets\index\gameshot1.png" />
+        <IndexImage imageUrl="src\assets\index\gameshot2.png" />
+        <IndexImage imageUrl="src\assets\index\gameshot3.png" />
+        <IndexImage imageUrl="src\assets\index\gameshot4.png" />
       </section>
       <section className="mt-4 mx-5">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat aliquam
-        reprehenderit dolorum vel, natus doloremque laboriosam perferendis a?
-        Tenetur distinctio magnam vitae rem dignissimos culpa sunt dolore labore
-        natus adipisci? At a iste maxime labore nam provident ipsa laudantium,
-        exercitationem nihil tempore? Veritatis dolor qui recusandae iusto
-        temporibus excepturi ipsa, voluptatem dolorum voluptates doloremque
-        maiores aliquid eaque assumenda sunt harum? Mollitia nihil et minima
-        corporis odit, quos fugit totam officiis sit nam qui minus aperiam quod.
-        Hic recusandae error quibusdam, quam commodi minima eius quasi libero
-        labore excepturi, optio sit. Nesciunt, unde sapiente deleniti omnis
-        eveniet laborum at magnam nobis similique, molestias dicta deserunt
-        reiciendis! In quia sed fugiat at error esse, amet praesentium
-        laboriosam veritatis, animi tempora. Quisquam, deserunt. Magni, minima
-        dolor repellendus nam accusantium, obcaecati reprehenderit sapiente
-        soluta quis non necessitatibus nobis, architecto rem. Excepturi expedita
-        tempora voluptas eos. Neque aliquid explicabo facere. Dolorem expedita
-        voluptatum ipsa eius.
+        <div className="font-bold text-lg">Features</div>
+        <div className="font-bold">Strategic Turns:</div>
+        <div>
+          Each player alternates turns, making critical decisions to strengthen
+          their position. In every turn, you can move your pieces, attack enemy
+          units, or deploy reinforcements.
+        </div>
+        <div className="font-bold">Gold Generation & Spending:</div>
+        <div>
+          Your income grows based on the number of villages and keeps you
+          control. Use gold to recruit new units from an expanding roster of
+          medieval troops. Choose wisely—your gold is limited, and every
+          purchase counts.
+        </div>
+        <div className="font-bold">Territory Control:</div>
+        <div>
+          Villages and keeps are your lifeblood, generating the gold you need to
+          dominate. Move your king onto an enemy-controlled structure to claim
+          it as your own. Defend your territories to deny your opponent valuable
+          resources.
+        </div>
       </section>
     </div>
   );

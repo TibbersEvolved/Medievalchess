@@ -1,7 +1,7 @@
 import { playerData } from "./gameInfo";
 
 export default function GameInfoPlayer(props: playerData) {
-  let color = "shadow-md bg-primary";
+  let color = "shadow-md bg-primary font-normal";
   if (props.currentTurn) color = "bg-base-100 shadow-md font-bold";
   return (
     <>

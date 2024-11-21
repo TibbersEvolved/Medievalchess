@@ -32,7 +32,7 @@ export default function GameInfo(props: prop) {
     <>
       <section className="flex flex-col gap-2 bg-base-200 p-3 rounded-sm min-w-80 shadow-md">
         <div className="font-extrabold">{typedData.gameName}</div>
-        <div>Turn: {typedData.gameTurn}</div>
+        <div className="font-normal">Turn: {typedData.gameTurn}</div>
         {typedData.players.map((player, index) => {
           return (
             <GameInfoPlayer
