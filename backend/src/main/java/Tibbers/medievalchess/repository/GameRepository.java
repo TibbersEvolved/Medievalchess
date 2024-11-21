@@ -12,7 +12,6 @@ public class GameRepository {
     List<Game> activeGames = new ArrayList<>();
 
     public GameRepository() {
-        startNewGame("TestGame","Jason","Nala");
     }
 
     public UUID startNewGame(String gameName, String player1, String player2) {

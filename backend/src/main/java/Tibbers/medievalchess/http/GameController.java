@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,16 +28,22 @@ public class GameController {
 
     private HostService hostService;
     private GameService gameService;
+    private Comparator<TileDto> sorter;
 
     public GameController(HostService hostService, GameService gameService) {
         this.hostService = hostService;
         this.gameService = gameService;
+        sorter = Comparator.comparing(tile -> tile.yCord());
+        sorter = sorter.thenComparing(tile -> tile.xCord());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ActiveGameDto> getGame(@PathVariable String id) {
         Game game = hostService.getGameById(UUID.fromString(id));
-     return ResponseEntity.ok(getGameDtoFromGame(game));
+        List<TileDto> list = getTileDtoList(game);
+        List<TileDto> l2 = list.stream().sorted(sorter).toList();
+        ActiveGameDto output = new ActiveGameDto(l2);
+     return ResponseEntity.ok(output);
     }
 
     @PostMapping("/endTurn/{id}")
@@ -85,6 +92,20 @@ public class GameController {
         return new ActiveGameDto(tileDtoList);
     }
 
+    private List<TileDto> getTileDtoList(Game game) {
+        List<TileDto> tileDtoList = new ArrayList<>();
+        List<Tile> tiles = game.getTiles();
+        for(int i = 0; i < tiles.size(); i++) {
+            {
+                Tile t = tiles.get(i);
+                PieceDto piece = buildPieceDto(t);
+                StructureDto structure = buildStructureDto(t);
+                tileDtoList.add(new TileDto(t.getX(),t.getY(),piece,structure));
+            }
+        }
+        return tileDtoList;
+    }
+
     private PieceDto getEmptyPieceDto() {
         return new PieceDto("none",0,0,0);
     }
@@ -108,4 +129,6 @@ public class GameController {
         }
         return new StructureDto(t.getPlayer().getTurnId(),t.getType());
     }
+
+
 }

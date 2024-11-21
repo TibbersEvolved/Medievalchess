@@ -17,6 +17,17 @@ export async function webPieceMove(
     xTo: xTo,
     yTo: yTo,
   };
+  console.log(
+    "Sending request with id: " + id,
+    "And body: " +
+      payload.xTo +
+      "/" +
+      payload.yTo +
+      " from" +
+      payload.xFrom +
+      "/" +
+      payload.yFrom
+  );
   return fetch(basepath + "games/move/" + id, {
     method: "POST",
     headers: {

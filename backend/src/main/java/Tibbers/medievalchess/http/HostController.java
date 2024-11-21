@@ -6,6 +6,7 @@ import Tibbers.medievalchess.service.HostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,6 +45,8 @@ public class HostController {
     @GetMapping("/{id}")
     public ResponseEntity<HostGameDetailedDto> getDetailedGameInfo(@PathVariable String id) {
         Game game = hostService.getGameById(UUID.fromString(id));
+
+
         List<PlayerDto> players = new ArrayList<>();
         players.add(new PlayerDto
                 (game.getPlayer(0).getName(),game.getPlayer(0).getGold()));

@@ -30,12 +30,15 @@ public class Tile {
         piece = null;
     }
 
-    public Tile(int x, int y) {
+    public Tile(int x, int y, Game game) {
         structure = null;
         piece = null;
         this.x = x;
         this.y = y;
+        this.game = game;
     }
+
+
 
     public Structure getStructure() {
         return structure;
@@ -54,6 +57,8 @@ public class Tile {
 
     public Structure setStructure(Structure structure) {
         this.structure = structure;
+        structure.setGame(game);
+        structure.setTile(this);
         return structure;
     }
 
@@ -63,6 +68,8 @@ public class Tile {
 
     public void setPiece(Piece piece) {
         this.piece = piece;
+        if(piece != null)
+        piece.setTile(this);
     }
 
     public int getX() {

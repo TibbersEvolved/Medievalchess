@@ -19,7 +19,8 @@ public class Player {
     @OneToMany(mappedBy = "player")
     private List<Structure> structures;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "game")
     private Game game;
 
     @OneToMany(mappedBy = "player")
@@ -27,6 +28,11 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        gold = 0;
+    }
+    public Player(String name, Game game) {
+        this.name = name;
+        this.game = game;
         gold = 0;
     }
 

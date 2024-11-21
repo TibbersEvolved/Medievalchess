@@ -11,6 +11,7 @@ export const defaultSelectedTile: gameBoardSelectedTile = {
   yCord: 0,
   piece: "none",
   active: 0,
+  owner: -1,
 };
 
 export default function GameBoard(props: boardProp) {

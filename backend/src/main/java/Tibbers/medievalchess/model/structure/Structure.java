@@ -70,4 +70,12 @@ public class Structure {
     public void setType(String type) {
         this.type = type;
     }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
 }

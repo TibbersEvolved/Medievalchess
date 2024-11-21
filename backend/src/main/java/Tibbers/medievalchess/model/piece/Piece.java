@@ -32,8 +32,20 @@ public class Piece {
     public Piece() {
     }
 
+    public Piece(Player player, int hp, String type, String movementType,
+                 String weakAgainst, int movementSpeed, int attackRange, int active) {
+        this.player = player;
+        this.hp = hp;
+        this.type = type;
+        this.movementType = movementType;
+        this.weakAgainst = weakAgainst;
+        this.movementSpeed = movementSpeed;
+        this.attackRange = attackRange;
+        this.active = active;
+    }
+
     public boolean takeDamage(String dmgType) {
-        if(dmgType == weakAgainst) {
+        if(dmgType.equals(weakAgainst)) {
             hp -= 2;
         } else {
             hp -= 1;
@@ -113,5 +125,13 @@ public class Piece {
 
     public void setAttackRange(int attackRange) {
         this.attackRange = attackRange;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
     }
 }

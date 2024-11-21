@@ -2,6 +2,7 @@ package Tibbers.medievalchess.service;
 
 import Tibbers.medievalchess.model.BuyOption;
 import Tibbers.medievalchess.model.Game;
+import Tibbers.medievalchess.repository.GameDbRepository;
 import Tibbers.medievalchess.repository.GameRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,28 +15,39 @@ public class GameService {
 
     private List<BuyOption> buyOptionList;
     private GameRepository gameRepository;
+    private GameDbRepository gameDbRepository;
 
-    public GameService (GameRepository gameRepository) {
+    public GameService (GameRepository gameRepository, GameDbRepository gameDbRepository) {
         this.gameRepository = gameRepository;
+        this.gameDbRepository = gameDbRepository;
         buyOptionList = seedBuyOptions();
     }
 
     public Boolean buyUnit(UUID id, int posX, int posY, String type, int playerId) {
-        Game game = gameRepository.findGameById(id);
-        return game.buyUnit(posX, posY, type, playerId,buyOptionList);
+        Game game = gameDbRepository.findById(id).get();
+        Boolean result = game.buyUnit(posX, posY, type, playerId,buyOptionList);
+        gameDbRepository.save(game);
+        return result;
     }
 
     public void endGameTurn(UUID id) {
-        gameRepository.findGameById(id).endTurn();
+        Game game = gameDbRepository.findById(id).get();
+        game.endTurn();
+        gameDbRepository.save(game);
     }
 
     public boolean damagePiece(int x, int y, int xTo, int yTo, UUID gameId) {
-        Game game = gameRepository.findGameById(gameId);
-        return game.attackUnit(x, y, xTo, yTo);
+        Game game = gameDbRepository.findById(gameId).get();
+        Boolean result = game.attackUnit(x, y, xTo, yTo);
+        gameDbRepository.save(game);
+        return result;
     }
 
     public boolean movePiece(UUID id, int xFrom, int yFrom, int xTo, int yTo) {
-        return gameRepository.findGameById(id).moveUnit(xFrom, yFrom, xTo, yTo);
+        Game game = gameDbRepository.findById(id).get();
+        Boolean result = game.moveUnit(xFrom, yFrom, xTo, yTo);
+        gameDbRepository.save(game);
+        return result;
     }
 
     private List<BuyOption> seedBuyOptions() {
