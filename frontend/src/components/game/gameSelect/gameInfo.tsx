@@ -1,9 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { basepath } from "../../../utilities/backendPaths";
 import GameInfoPlayer from "./gameInfoPlayer";
 import { stateCallback } from "./listGameSelect";
+import { webDeleteGame } from "../gameActive/utilities/fetchCommands";
 
 export default function GameInfo(props: prop) {
+  const client = useQueryClient();
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["gameInfo", props.id],
     queryFn: () => fetchInfo(props.id),
@@ -17,6 +19,14 @@ export default function GameInfo(props: prop) {
     return <span>Error: {error.message}</span>;
   }
   const typedData: gameData = data;
+  async function handleDelete() {
+    await webDeleteGame(props.id);
+    client.invalidateQueries({
+      queryKey: ["listGameSelect"],
+      refetchType: "all",
+    });
+    props.callbackDelete();
+  }
 
   return (
     <>
@@ -25,11 +35,19 @@ export default function GameInfo(props: prop) {
         <div>Turn: {typedData.gameTurn}</div>
         {typedData.players.map((player, index) => {
           return (
-            <GameInfoPlayer name={player.name} gold={player.gold} key={index} />
+            <GameInfoPlayer
+              name={player.name}
+              gold={player.gold}
+              key={index}
+              currentTurn={typedData.playerTurn == index}
+            />
           );
         })}
         <button className="btn bg-base-300" onClick={props.cb}>
           Enter Game
+        </button>
+        <button className="btn btn-warning" onClick={handleDelete}>
+          Abandon Game
         </button>
       </section>
     </>
@@ -46,11 +64,13 @@ type gameData = {
 export type playerData = {
   name: string;
   gold: string;
+  currentTurn: boolean;
 };
 
 type prop = {
   id: string;
   cb: stateCallback;
+  callbackDelete: stateCallback;
 };
 
 function fetchInfo(id: string) {

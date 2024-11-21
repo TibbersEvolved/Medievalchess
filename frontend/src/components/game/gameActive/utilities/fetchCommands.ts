@@ -1,4 +1,5 @@
 import { basepath } from "../../../../utilities/backendPaths";
+import { serverMessage } from "./toasts";
 
 export async function webEndTurn(id: string) {
   return fetch(basepath + "games/endTurn/" + id, { method: "POST" });
@@ -68,6 +69,21 @@ export async function webAttackUnit(payload: AttackRequest, gameId: string) {
     },
     body: JSON.stringify(payload),
   });
+}
+
+export async function webDeleteGame(gameId: string) {
+  const respone = await fetch(basepath + "hosts/" + gameId, {
+    method: "DELETE",
+  });
+  const statusCode = respone.status.toString();
+  if (statusCode === "200") {
+    serverMessage("Game was deleted!", 0);
+    return;
+  }
+  serverMessage(
+    "Something went wrong, server responded with code: " + statusCode,
+    1
+  );
 }
 
 export type AttackRequest = {

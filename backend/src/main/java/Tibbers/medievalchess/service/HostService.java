@@ -38,6 +38,8 @@ public class HostService {
     }
 
     public void deleteGame(String id) {
-        gameRepository.deleteGame(id);
+        Game game = gameDbRepository.findById(UUID.fromString(id)).get();
+        game.getTiles().stream().forEach(s -> s.setPiece(null));
+        gameDbRepository.delete(game);
     }
 }

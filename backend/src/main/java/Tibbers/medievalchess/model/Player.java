@@ -23,7 +23,7 @@ public class Player {
     @JoinColumn(name = "game")
     private Game game;
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private List<Piece> pieces;
 
     public Player(String name) {

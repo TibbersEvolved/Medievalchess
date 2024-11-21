@@ -12,7 +12,7 @@ export default function ListGameSelect(props: gameSelectProp) {
     setSelected(true);
   }
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ["todos"],
+    queryKey: ["listGameSelect"],
     queryFn: fetchGames,
   });
 
@@ -41,7 +41,11 @@ export default function ListGameSelect(props: gameSelectProp) {
           })}
         </div>
         {selected && (
-          <GameInfo id={selectId} cb={() => props.callback(selectId)} />
+          <GameInfo
+            id={selectId}
+            cb={() => props.callback(selectId)}
+            callbackDelete={() => setSelected(false)}
+          />
         )}
       </section>
     </>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { basepath } from "../../../utilities/backendPaths";
+import { serverMessage } from "../gameActive/utilities/toasts";
 
 export default function GameCreateForm() {
   async function handlePost(e: React.FormEvent<HTMLFormElement>) {
@@ -39,11 +40,16 @@ type dto = {
 };
 
 async function createGame(data: dto) {
-  fetch(basepath + "hosts", {
+  const response = await fetch(basepath + "hosts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },
     body: JSON.stringify(data),
   });
+  const statusCode = response.status.toString();
+  if (statusCode === "200") {
+    serverMessage(data.gameName + " was created!", 0);
+    return;
+  }
 }
