@@ -29,14 +29,14 @@ export default function GameCreateForm() {
 
   return (
     <>
-      <div className="mx-auto w-fit">
+      <div className="mx-auto mt-3 w-fit  p-6 rounded-sm boardForm">
         <form className="flex flex-col gap-2 " onSubmit={(e) => handlePost(e)}>
-          <div className="text-2xl">Create New Game</div>
-          <label className="text-center">Game Name:</label>
+          <div className="text-2xl text-base-100">Create New Game</div>
+          <label className="text-center text-base-100">Game Name:</label>
           <input className="rounded-md " type="text"></input>
-          <label className="text-center">Player 1 Name:</label>
+          <label className="text-center text-base-100">Player 1 Name:</label>
           <input className="rounded-md" type="text"></input>
-          <label className="text-center">Player 2 Name:</label>
+          <label className="text-center text-base-100">Player 2 Name:</label>
           <input className="rounded-md" type="text"></input>
           <button className="btn btn-primary" type="submit">
             Create Game

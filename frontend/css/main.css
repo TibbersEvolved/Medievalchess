@@ -32,3 +32,9 @@ body {
   background-image: url("src/assets/background.jpg");
   background-size: 100%;
 }
+
+.boardForm {
+  background-image: url("src/assets/board2.png");
+  background-size: 140%;
+  background-position: -40px;
+}
