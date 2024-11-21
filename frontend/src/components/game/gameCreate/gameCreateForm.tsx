@@ -11,19 +11,33 @@ export default function GameCreateForm() {
       player1: (input.elements[1] as HTMLInputElement).value,
       player2: (input.elements[2] as HTMLInputElement).value,
     };
+    if (data.gameName.length <= 3) {
+      serverMessage("Game name must be larger than 3 letters", 1);
+      return;
+    }
+    if (data.player1.length <= 0) {
+      serverMessage("Player names cannot be empty!", 1);
+      return;
+    }
+    if (data.player2.length <= 0) {
+      serverMessage("Player names cannot be empty!", 1);
+      return;
+    }
+    e.currentTarget.reset();
     createGame(data);
   }
 
   return (
     <>
       <div className="mx-auto w-fit">
-        <form className="flex flex-col gap-3" onSubmit={(e) => handlePost(e)}>
-          <label>Game Name:</label>
-          <input type="text"></input>
-          <label>Player 1 Name:</label>
-          <input type="text"></input>
-          <label>Player 2 Name:</label>
-          <input type="text"></input>
+        <form className="flex flex-col gap-2 " onSubmit={(e) => handlePost(e)}>
+          <div className="text-2xl">Create New Game</div>
+          <label className="text-center">Game Name:</label>
+          <input className="rounded-md " type="text"></input>
+          <label className="text-center">Player 1 Name:</label>
+          <input className="rounded-md" type="text"></input>
+          <label className="text-center">Player 2 Name:</label>
+          <input className="rounded-md" type="text"></input>
           <button className="btn btn-primary" type="submit">
             Create Game
           </button>

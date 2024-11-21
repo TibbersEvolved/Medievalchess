@@ -32,21 +32,37 @@ function HomeComponent() {
           title="Archer"
           text="Attacks enemies from afar."
           imageUrl="src\assets\pieces\archer\archerBlue.png"
+          hp={2}
+          cost={20}
+          range={2}
+          move={1}
         />
         <PieceInfo
           title="Knight"
           text="Fast movement and can take a lot of hits. Strong versus archers"
           imageUrl="src\assets\pieces\knight\knightRed.png"
+          hp={3}
+          cost={30}
+          range={1}
+          move={2}
         />
         <PieceInfo
           title="Torch"
           text="Can move in any direction. Good versus knights"
           imageUrl="src\assets\pieces\torch\torchBlue.png"
+          hp={2}
+          cost={15}
+          range={1}
+          move={1}
         />
         <PieceInfo
           title="King"
           text="Can take over structures. If he dies, you lose!"
           imageUrl="src\assets\pieces\king\kingRed.png"
+          hp={4}
+          cost={0}
+          range={1}
+          move={1}
         />
       </section>
     </div>
