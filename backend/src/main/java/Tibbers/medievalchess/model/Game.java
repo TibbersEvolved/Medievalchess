@@ -66,7 +66,7 @@ public class Game {
             gold += structures.get(i).getIncome(playerList.get(playerTurn));
         }
         resetPieceMovement();
-        playerList.get(playerTurn).gainIncome(gold);
+        getPlayer(playerTurn).gainIncome(gold);
     }
 
     public boolean buyUnit(int posX, int posY, String type, int playerId, List<BuyOption> buyOptions) {
@@ -91,7 +91,6 @@ public class Game {
                 buyOpt = buyOptions.get(i);
             }
         }
-        System.out.println("buyOpt = " + buyOpt);
         if (player.spendGold(buyOpt.getCost())) {
             tile.setPiece(buyOpt.getPiece(player));
             return true;
