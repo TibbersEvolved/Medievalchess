@@ -22,3 +22,11 @@
 body {
   font-family: "Didact Gothic", sans-serif;
 }
+
+.renderSize {
+  min-height: 1000px;
+}
+
+.renderScreen {
+  min-height: 95vh;
+}

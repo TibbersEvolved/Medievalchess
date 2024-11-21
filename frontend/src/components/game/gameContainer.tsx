@@ -19,7 +19,9 @@ export default function GameContainer() {
   if (activeGame == 1)
     return (
       <>
-        <GameBoard id={selectedGame} />
+        <div className="mb-20">
+          <GameBoard id={selectedGame} />
+        </div>
       </>
     );
   return (

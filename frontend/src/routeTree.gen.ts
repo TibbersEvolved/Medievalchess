@@ -11,11 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PlayinfoImport } from './routes/playinfo'
 import { Route as NewGameImport } from './routes/newGame'
 import { Route as GameImport } from './routes/game'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const PlayinfoRoute = PlayinfoImport.update({
+  id: '/playinfo',
+  path: '/playinfo',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const NewGameRoute = NewGameImport.update({
   id: '/newGame',
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewGameImport
       parentRoute: typeof rootRoute
     }
+    '/playinfo': {
+      id: '/playinfo'
+      path: '/playinfo'
+      fullPath: '/playinfo'
+      preLoaderRoute: typeof PlayinfoImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +83,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game': typeof GameRoute
   '/newGame': typeof NewGameRoute
+  '/playinfo': typeof PlayinfoRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/game': typeof GameRoute
   '/newGame': typeof NewGameRoute
+  '/playinfo': typeof PlayinfoRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +98,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/game': typeof GameRoute
   '/newGame': typeof NewGameRoute
+  '/playinfo': typeof PlayinfoRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/game' | '/newGame'
+  fullPaths: '/' | '/game' | '/newGame' | '/playinfo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/game' | '/newGame'
-  id: '__root__' | '/' | '/game' | '/newGame'
+  to: '/' | '/game' | '/newGame' | '/playinfo'
+  id: '__root__' | '/' | '/game' | '/newGame' | '/playinfo'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +114,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRoute: typeof GameRoute
   NewGameRoute: typeof NewGameRoute
+  PlayinfoRoute: typeof PlayinfoRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRoute: GameRoute,
   NewGameRoute: NewGameRoute,
+  PlayinfoRoute: PlayinfoRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/game",
-        "/newGame"
+        "/newGame",
+        "/playinfo"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/newGame": {
       "filePath": "newGame.tsx"
+    },
+    "/playinfo": {
+      "filePath": "playinfo.tsx"
     }
   }
 }
