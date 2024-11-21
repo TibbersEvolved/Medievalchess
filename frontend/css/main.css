@@ -28,5 +28,7 @@ body {
 }
 
 .renderScreen {
-  min-height: 95vh;
+  min-height: 94vh;
+  background-image: url("src/assets/background.jpg");
+  background-size: 100%;
 }

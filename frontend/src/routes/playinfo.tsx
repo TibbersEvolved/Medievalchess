@@ -3,6 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import GameInfoPlayer from "../components/game/gameSelect/gameInfoPlayer";
 import GameInfo from "../components/game/gameSelect/gameInfo";
 import PieceInfo from "../components/playinfo/pieceInfo";
+import StructureInfo from "../components/playinfo/structureInfo";
+import SiteFooter from "../components/root/siteFooter";
 
 export const Route = createFileRoute("/playinfo")({
   component: HomeComponent,
@@ -63,6 +65,19 @@ function HomeComponent() {
           cost={0}
           range={1}
           move={1}
+        />
+      </section>
+      <header className="text-3xl mt-4 gap-10">List of Structures</header>
+      <section className="flex flex-row flex-wrap mx-10 justify-center">
+        <StructureInfo
+          title="Keep"
+          text="Provides 5 gold income. You can also buy units from here"
+          imageUrl="src\assets\structures\keep\keepBlue.png"
+        />
+        <StructureInfo
+          title="Town"
+          text="Provides 10 gold income."
+          imageUrl="src\assets\structures\house\houseRed.png"
         />
       </section>
     </div>

@@ -19,12 +19,17 @@ export default function PieceInfo(props: prop) {
             ))}
           </div>
           <section className="flex flex-row  justify-center">
-            <div>{props.cost}</div>
+            <div className="mx-1">{props.cost}</div>
             <img className="size-5" src="src\assets\resources\gold.png"></img>
             <div>{props.move}</div>
-            <div>{props.range}</div>
+            <img className="size-5" src="src\assets\resources\speed.png"></img>
+            <div className="mx-1">{props.range}</div>
+            <img
+              className="size-5"
+              src="src\assets\resources\attackRange.png"
+            ></img>
           </section>
-          <div>{props.text}</div>
+          <div className="mx-1">{props.text}</div>
         </div>
       </section>
     </>
