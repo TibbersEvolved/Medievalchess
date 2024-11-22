@@ -33,7 +33,7 @@ function HomeComponent() {
         <PieceInfo
           title="Archer"
           text="Attacks enemies from afar."
-          imageUrl="src\assets\pieces\archer\archerBlue.png"
+          imageUrl="\assets\pieces\archer\archerBlue.png"
           hp={2}
           cost={20}
           range={2}
@@ -42,7 +42,7 @@ function HomeComponent() {
         <PieceInfo
           title="Knight"
           text="Fast movement and can take a lot of hits. Strong versus archers"
-          imageUrl="src\assets\pieces\knight\knightRed.png"
+          imageUrl="\assets\pieces\knight\knightRed.png"
           hp={3}
           cost={30}
           range={1}
@@ -51,7 +51,7 @@ function HomeComponent() {
         <PieceInfo
           title="Torch"
           text="Can move in any direction. Good versus knights"
-          imageUrl="src\assets\pieces\torch\torchBlue.png"
+          imageUrl="\assets\pieces\torch\torchBlue.png"
           hp={2}
           cost={15}
           range={1}
@@ -60,7 +60,7 @@ function HomeComponent() {
         <PieceInfo
           title="King"
           text="Can take over structures. If he dies, you lose!"
-          imageUrl="src\assets\pieces\king\kingRed.png"
+          imageUrl="\assets\pieces\king\kingRed.png"
           hp={4}
           cost={0}
           range={1}
@@ -72,12 +72,12 @@ function HomeComponent() {
         <StructureInfo
           title="Keep"
           text="Provides 5 gold income. You can also buy units from here"
-          imageUrl="src\assets\structures\keep\keepBlue.png"
+          imageUrl="/assets\structures\keep\keepBlue.png"
         />
         <StructureInfo
           title="Town"
           text="Provides 10 gold income."
-          imageUrl="src\assets\structures\house\houseRed.png"
+          imageUrl="/assets\structures\house\houseRed.png"
         />
       </section>
     </div>

@@ -7,7 +7,7 @@ export default function Navbar() {
       <div className="p-2 flex justify-between text-lg bg-base-300 w-full shadow-inner shadow-slate-950">
         <section className="flex flex-row gap-10">
           <div className="font-bold">Medieval Chess</div>
-          <img src="./src/assets/appIcon.png" className="size-8"></img>
+          <img src="/assets/appIcon.png" className="size-8"></img>
         </section>
         <section className="flex flex-row gap-10 mr-36 ">
           <Link

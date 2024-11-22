@@ -22,10 +22,10 @@ function HomeComponent() {
         you build an impenetrable fortress? The choice is yours.
       </section>
       <section className="flex flex-row gap-8 justify-center mt-3">
-        <IndexImage imageUrl="src\assets\index\gameshot1.png" />
-        <IndexImage imageUrl="src\assets\index\gameshot2.png" />
-        <IndexImage imageUrl="src\assets\index\gameshot3.png" />
-        <IndexImage imageUrl="src\assets\index\gameshot4.png" />
+        <IndexImage imageUrl="\assets\index\gameshot1.png" />
+        <IndexImage imageUrl="\assets\index\gameshot2.png" />
+        <IndexImage imageUrl="\assets\index\gameshot3.png" />
+        <IndexImage imageUrl="\assets\index\gameshot4.png" />
       </section>
       <section className="mt-4 mx-5">
         <div className="font-bold text-lg">Features</div>

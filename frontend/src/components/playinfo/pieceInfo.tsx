@@ -14,19 +14,19 @@ export default function PieceInfo(props: prop) {
               <img
                 key={t}
                 className="size-3"
-                src="src/assets/resources/hearth.png"
+                src="/assets/resources/hearth.png"
               ></img>
             ))}
           </div>
           <section className="flex flex-row  justify-center">
             <div className="mx-1">{props.cost}</div>
-            <img className="size-5" src="src\assets\resources\gold.png"></img>
+            <img className="size-5" src="\assets\resources\gold.png"></img>
             <div>{props.move}</div>
-            <img className="size-5" src="src\assets\resources\speed.png"></img>
+            <img className="size-5" src="\assets\resources\speed.png"></img>
             <div className="mx-1">{props.range}</div>
             <img
               className="size-5"
-              src="src\assets\resources\attackRange.png"
+              src="\assets\resources\attackRange.png"
             ></img>
           </section>
           <div className="mx-1">{props.text}</div>

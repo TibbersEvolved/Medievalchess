@@ -75,7 +75,7 @@ export default function Tile(prop: tileProp) {
       <div>
         <img
           className="z-10 absolute piece"
-          src="src/assets/tiles/grassTile.png"
+          src="assets/tiles/grassTile.png"
           alt=""
           onClick={handleSelect}
         />
@@ -85,14 +85,14 @@ export default function Tile(prop: tileProp) {
         {canMove && (
           <img
             className="z-20 piece absolute pointer-events-none"
-            src="src/assets/tiles/selectTile.png"
+            src="/assets/tiles/selectTile.png"
             alt=""
           />
         )}
         {canAttack && (
           <img
             className="z-20 piece absolute pointer-events-none"
-            src="src/assets/tiles/attackTile.png"
+            src="/assets/tiles/attackTile.png"
             alt=""
           />
         )}

@@ -29,12 +29,12 @@ body {
 
 .renderScreen {
   min-height: 94vh;
-  background-image: url("src/assets/background.jpg");
+  background-image: url("/assets/background.jpg");
   background-size: 100%;
 }
 
 .boardForm {
-  background-image: url("src/assets/board2.png");
+  background-image: url("/assets/board2.png");
   background-size: 140%;
   background-position: -40px;
 }
