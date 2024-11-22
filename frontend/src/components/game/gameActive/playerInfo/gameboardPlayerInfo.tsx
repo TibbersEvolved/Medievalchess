@@ -3,6 +3,7 @@ import { basepath } from "../../../../utilities/backendPaths";
 import GameInfoPlayer from "../../gameSelect/gameInfoPlayer";
 import { stateCallback } from "../../gameSelect/listGameSelect";
 import { webEndTurn } from "../utilities/fetchCommands";
+import { endTurnToast } from "../utilities/toasts";
 
 export default function GameBoardPlayerInfo(props: prop) {
   const { isPending, isError, data, error } = useQuery({
@@ -20,6 +21,13 @@ export default function GameBoardPlayerInfo(props: prop) {
   const typedData: gameData = data;
   async function endTurn() {
     await webEndTurn(props.id);
+    let name = "";
+    for (let i = 0; i < typedData.players.length; i++) {
+      if (i != typedData.playerTurn) {
+        name = typedData.players[i].name;
+      }
+    }
+    endTurnToast(name + "'s turn!");
     props.cb();
   }
 
